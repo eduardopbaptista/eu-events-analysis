@@ -441,7 +441,7 @@ function renderNC(){
     }
 
     // Event block
-    const rows=filtered.map(c=>`<tr><td>${c.name}</td><td style="color:#555;font-size:12px">${c.title||'—'}</td><td style="color:#555;font-size:12px">${c.company||'—'}</td><td><span class="resp-badge">${c.responsible||'—'}</span></td></tr>`).join('');
+    const rows=[...filtered].sort((a,b)=>(a.responsible||'').localeCompare(b.responsible||'')).map(c=>`<tr><td>${c.name}</td><td style="color:#555;font-size:12px">${c.title||'—'}</td><td style="color:#555;font-size:12px">${c.company||'—'}</td><td><span class="resp-badge">${c.responsible||'—'}</span></td></tr>`).join('');
     html+=`<div class="nc-block"><div class="nc-hdr" onclick="this.nextElementSibling.classList.toggle('open')"><span class="nc-hdr-title">${ev}</span><span class="nc-hdr-count">${filtered.length} guest${filtered.length>1?'s':''}</span></div><div class="nc-body"><table class="nc-table"><thead><tr><th>Contato</th><th>Cargo</th><th>Empresa</th><th>GRI Responsible</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
   });
 
