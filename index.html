@@ -5,106 +5,135 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GRI EU Events 2026</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a1a; font-size: 14px; }
-header { background: #fff; border-bottom: 1px solid #e0dfd8; padding: 18px 32px; display: flex; align-items: center; gap: 12px; }
-header h1 { font-size: 17px; font-weight: 600; }
-header span { font-size: 13px; color: #888; }
-.container { max-width: 1280px; margin: 0 auto; padding: 24px 32px; }
-.tabs { display: flex; border-bottom: 1px solid #e0dfd8; margin-bottom: 24px; }
-.tab-btn { font-size: 13px; font-weight: 500; padding: 10px 20px; border: none; background: none; color: #888; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.15s, border-color 0.15s; }
-.tab-btn:hover { color: #1a1a1a; }
-.tab-btn.active { color: #185FA5; border-bottom-color: #185FA5; }
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
-.filters { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
-.filters label { font-size: 12px; color: #666; margin-right: 2px; }
-select { font-size: 13px; padding: 7px 12px; border-radius: 8px; border: 1px solid #ddd; background: #fff; color: #1a1a1a; cursor: pointer; outline: none; }
-select:focus { border-color: #185FA5; }
-.sort-group { display: flex; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
-.sort-btn { font-size: 12px; padding: 7px 13px; border: none; background: #fff; color: #555; cursor: pointer; border-right: 1px solid #ddd; white-space: nowrap; transition: background 0.1s, color 0.1s; }
-.sort-btn:last-child { border-right: none; }
-.sort-btn:hover { background: #f5f4f0; }
-.sort-btn.active { background: #185FA5; color: #fff; font-weight: 600; }
-.sep { width: 1px; background: #e0dfd8; margin: 0 6px; align-self: stretch; }
-.summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
-.metric { background: #fff; border-radius: 10px; border: 1px solid #e8e7e0; padding: 14px 18px; }
-.metric-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; }
-.metric-value { font-size: 24px; font-weight: 600; }
-.metric-value.blue { color: #185FA5; }
-.metric-value.green { color: #0F6E56; }
-.card { background: #fff; border-radius: 12px; border: 1px solid #e8e7e0; }
-.table-wrap { overflow-x: auto; overflow-y: auto; max-height: calc(100vh - 200px); }
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-thead th { position: sticky; top: 0; z-index: 20; background: #f0efe8; font-size: 11px; font-weight: 600; color: #444; text-align: left; padding: 10px 14px; border-bottom: 2px solid #d0cfc8; white-space: nowrap; letter-spacing: 0.03em; text-transform: uppercase; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-thead th.num { text-align: right; }
-tbody tr { border-bottom: 1px solid #f0efe8; transition: background 0.1s; }
-tbody tr:hover { background: #fafaf7; }
-tbody tr.country-hdr td { font-size: 11px; font-weight: 700; color: #fff; padding: 10px 14px; letter-spacing: 0.06em; text-transform: uppercase; background: #3d3c38; border-bottom: none; border-top: 2px solid #3d3c38; }
-tbody tr.country-sub td { font-size: 12px; font-weight: 600; padding: 8px 14px; color: #3d3c38; border-top: 1px solid #c8c7c0; background: #e8e7e0; }
-tbody td { padding: 9px 14px; vertical-align: middle; }
-tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
-.event-name { max-width: 280px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.badge { display: inline-block; font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 500; white-space: nowrap; }
-.b-club { background: #E1F5EE; color: #0B5E45; }
-.b-open { background: #E6F1FB; color: #0C447C; }
-.b-meet { background: #EEEDFE; color: #3C3489; }
-.b-exp  { background: #FAEEDA; color: #633806; }
-.b-ret  { background: #FAECE7; color: #712B13; }
-.city { color: #888; font-size: 12px; }
-.date { color: #888; font-size: 12px; white-space: nowrap; }
-.t-blue { color: #185FA5; font-weight: 600; }
-.t-green { color: #0F6E56; font-weight: 600; }
-.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.chart-card { background: #fff; border-radius: 12px; border: 1px solid #e8e7e0; padding: 22px 24px; }
-.chart-title { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
-.chart-sub { font-size: 12px; color: #888; margin-bottom: 14px; }
-.legend { display: flex; gap: 16px; margin-bottom: 12px; }
-.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #555; }
-.legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
-.footer { text-align: center; padding: 24px; font-size: 12px; color: #aaa; }
-@media (max-width: 900px) {
-  .charts-grid { grid-template-columns: 1fr; }
-  .summary { grid-template-columns: repeat(2,1fr); }
-  .container { padding: 16px; }
-  header { padding: 14px 16px; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#1a1a1a;font-size:14px}
+header{background:#fff;border-bottom:1px solid #e0dfd8;padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+header h1{font-size:16px;font-weight:600}
+.container{max-width:1400px;margin:0 auto;padding:20px 28px}
+.tabs{display:flex;border-bottom:1px solid #e0dfd8;margin-bottom:20px;flex-wrap:wrap}
+.tab-btn{font-size:13px;font-weight:500;padding:9px 18px;border:none;background:none;color:#888;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;white-space:nowrap}
+.tab-btn:hover{color:#1a1a1a}
+.tab-btn.active{color:#185FA5;border-bottom-color:#185FA5}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.metric{background:#fff;border-radius:10px;border:1px solid #e8e7e0;padding:14px 18px}
+.metric-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.metric-value{font-size:22px;font-weight:600}
+.metric-value.blue{color:#185FA5}
+.metric-value.green{color:#0F6E56}
+.filters{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.filters label{font-size:12px;color:#666;margin-right:2px}
+select{font-size:13px;padding:6px 10px;border-radius:7px;border:1px solid #ddd;background:#fff;color:#1a1a1a;cursor:pointer;outline:none}
+select:focus{border-color:#185FA5}
+.sort-group{display:flex;border:1px solid #ddd;border-radius:7px;overflow:hidden}
+.sort-btn{font-size:12px;padding:6px 12px;border:none;background:#fff;color:#555;cursor:pointer;border-right:1px solid #ddd;white-space:nowrap;transition:background .1s}
+.sort-btn:last-child{border-right:none}
+.sort-btn:hover{background:#f5f4f0}
+.sort-btn.active{background:#185FA5;color:#fff;font-weight:600}
+.sep{width:1px;background:#e0dfd8;margin:0 6px;align-self:stretch}
+.card{background:#fff;border-radius:12px;border:1px solid #e8e7e0}
+.table-wrap{overflow-x:auto;overflow-y:auto;max-height:calc(100vh - 240px)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{position:sticky;top:0;z-index:20;background:#f0efe8;font-size:11px;font-weight:600;color:#444;text-align:left;padding:10px 12px;border-bottom:2px solid #d0cfc8;white-space:nowrap;letter-spacing:.03em;text-transform:uppercase;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+thead th.num{text-align:right}
+tbody tr{border-bottom:1px solid #f0efe8;transition:background .1s}
+tbody tr:hover{background:#fafaf7}
+tbody tr.country-hdr td{font-size:11px;font-weight:700;color:#fff;padding:10px 12px;letter-spacing:.06em;text-transform:uppercase;background:#3d3c38;border-top:2px solid #3d3c38;border-bottom:none}
+tbody tr.country-sub td{font-size:12px;font-weight:600;padding:7px 12px;color:#3d3c38;border-top:1px solid #c8c7c0;background:#e8e7e0}
+tbody td{padding:8px 12px;vertical-align:middle}
+tbody td.num{text-align:right;font-variant-numeric:tabular-nums}
+.event-name{max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500;white-space:nowrap}
+.b-club{background:#E1F5EE;color:#0B5E45}
+.b-open{background:#E6F1FB;color:#0C447C}
+.b-meet{background:#EEEDFE;color:#3C3489}
+.b-exp{background:#FAEEDA;color:#633806}
+.b-ret{background:#FAECE7;color:#712B13}
+.city{color:#888;font-size:12px}
+.t-blue{color:#185FA5;font-weight:600}
+.t-green{color:#0F6E56;font-weight:600}
+.t-purple{color:#7C3AED;font-weight:600}
+.conv-btn{background:none;border:none;cursor:pointer;color:#7C3AED;font-weight:600;font-size:13px;padding:0;position:relative;text-decoration:underline dotted}
+.conv-btn:hover{color:#5B21B6}
+.conv-popup{display:none;position:absolute;z-index:200;background:#fff;border:1px solid #e0dfd8;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.12);padding:8px 0;min-width:200px;right:0;top:100%;margin-top:4px}
+.conv-popup.open{display:block}
+.conv-popup-title{font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.05em;padding:4px 14px 6px;border-bottom:1px solid #f0efe8}
+.conv-popup li{list-style:none;font-size:12px;color:#333;padding:5px 14px}
+.conv-popup li:hover{background:#f9f8f5}
+.conv-wrap{position:relative;display:inline-block}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.chart-card{background:#fff;border-radius:12px;border:1px solid #e8e7e0;padding:20px 22px}
+.chart-card.full{grid-column:1/-1}
+.chart-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.chart-sub{font-size:12px;color:#888;margin-bottom:12px}
+.legend{display:flex;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:12px;color:#555}
+.legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+/* MEDIA TAB */
+.media-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.media-card{background:#fff;border-radius:12px;border:1px solid #e8e7e0;padding:24px 28px}
+.media-card h3{font-size:14px;font-weight:600;margin-bottom:4px}
+.media-card p{font-size:12px;color:#888;margin-bottom:20px}
+.stat-big{font-size:48px;font-weight:700;color:#185FA5;margin-bottom:4px}
+.stat-sub{font-size:12px;color:#888}
+.stat-range{font-size:13px;color:#555;margin-top:8px}
+.cst{width:100%;border-collapse:collapse;font-size:13px}
+.cst th{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;text-align:left;padding:6px 0;border-bottom:1px solid #f0efe8}
+.cst th.r{text-align:right}
+.cst td{padding:9px 0;border-bottom:1px solid #f5f4f0}
+.cst td.r{text-align:right;font-variant-numeric:tabular-nums}
+.bar-track{flex:1;background:#f0efe8;border-radius:4px;height:6px}
+.bar-fill{background:#185FA5;border-radius:4px;height:6px}
+.note-box{background:#FFF7ED;border:1px solid #FED7AA;border-radius:8px;padding:12px 16px;font-size:12px;color:#92400E;margin-top:16px;line-height:1.5}
+/* NOT CONVERTED TAB */
+.nc-filters{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.nc-summary{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.nc-metric{background:#fff;border-radius:8px;border:1px solid #e8e7e0;padding:10px 16px}
+.nc-metric-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}
+.nc-metric-value{font-size:20px;font-weight:600}
+.nc-block{background:#fff;border-radius:10px;border:1px solid #e8e7e0;margin-bottom:12px;overflow:hidden}
+.nc-hdr{background:#3d3c38;color:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.nc-hdr-title{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.nc-hdr-count{font-size:12px;background:rgba(255,255,255,.2);border-radius:20px;padding:2px 10px}
+.nc-body{display:none}
+.nc-body.open{display:block}
+.nc-table{width:100%;border-collapse:collapse;font-size:13px}
+.nc-table th{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.03em;text-align:left;padding:8px 14px;background:#f9f8f5;border-bottom:1px solid #f0efe8}
+.nc-table td{padding:8px 14px;border-bottom:1px solid #f5f4f0;vertical-align:top}
+.nc-table tr:hover td{background:#fafaf7}
+.nc-table tr:last-child td{border-bottom:none}
+.resp-badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;background:#E6F1FB;color:#0C447C;font-weight:500;white-space:nowrap}
+.footer{text-align:center;padding:20px;font-size:12px;color:#aaa}
+@media(max-width:900px){
+  .charts-grid{grid-template-columns:1fr}
+  .media-grid{grid-template-columns:1fr}
+  .summary{grid-template-columns:repeat(2,1fr)}
+  .container{padding:16px}
+  header{padding:12px 16px}
 }
-
-.conv-btn { background: none; border: none; cursor: pointer; color: #7C3AED; font-weight: 600; font-size: 13px; padding: 0; position: relative; text-decoration: underline dotted; }
-.conv-btn:hover { color: #5B21B6; }
-.conv-popup { display: none; position: absolute; z-index: 100; background: #fff; border: 1px solid #e0dfd8; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.12); padding: 8px 0; min-width: 200px; right: 0; top: 100%; margin-top: 4px; }
-.conv-popup.open { display: block; }
-.conv-popup-title { font-size: 10px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 14px 6px; border-bottom: 1px solid #f0efe8; }
-.conv-popup li { list-style: none; font-size: 12px; color: #333; padding: 5px 14px; }
-.conv-popup li:hover { background: #f9f8f5; }
-.conv-wrap { position: relative; display: inline-block; }
 </style>
 </head>
 <body>
-
 <header>
-  <h1>GRI Europe Division <span>— Eventos 2026</span></h1>
+  <h1>GRI Europe Division <span style="font-weight:400;color:#888">— Eventos 2026</span></h1>
 </header>
-
 <div class="container">
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('table')">Tabela de eventos</button>
     <button class="tab-btn" onclick="switchTab('charts')">Gráficos</button>
+    <button class="tab-btn" onclick="switchTab('media')">Média</button>
+    <button class="tab-btn" onclick="switchTab('notconv')">Guests não convertidos</button>
   </div>
-
   <div class="summary" id="summary"></div>
 
-  <!-- TAB TABLE -->
+  <!-- TABLE -->
   <div class="tab-panel active" id="tab-table">
     <div class="filters">
-      <div><label>País </label>
-        <select id="fCountry" onchange="render()"><option value="">Todos os países</option></select>
-      </div>
-      <div><label>Tipo </label>
-        <select id="fType" onchange="render()"><option value="">Todos os tipos</option></select>
-      </div>
+      <div><label>País </label><select id="fCountry" onchange="render()"><option value="">Todos os países</option></select></div>
+      <div><label>Tipo </label><select id="fType" onchange="render()"><option value="">Todos os tipos</option></select></div>
       <div class="sep"></div>
-      <div style="display:flex;align-items:center;gap:8px;">
+      <div style="display:flex;align-items:center;gap:8px">
         <label>Ordenar por</label>
         <div class="sort-group">
           <button class="sort-btn active" id="s-country" onclick="setSort('country')">País</button>
@@ -119,8 +148,7 @@ tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
         <table>
           <thead><tr>
             <th>Evento</th><th>Tipo</th><th>Sub Type</th><th>Cidade</th><th>Data</th>
-            <th class="num">Members</th><th class="num">Guests</th>
-            <th class="num">Co-chairs</th><th class="num">Delegates</th>
+            <th class="num">Members</th><th class="num">Guests</th><th class="num">Co-chairs</th><th class="num">Delegates</th>
             <th class="num">Total vendas</th><th class="num">SPEX</th>
             <th class="num" title="Guests com opp won após o evento">Guests conv.</th>
             <th class="num" title="Valor total das opps won de guests convertidos">Valor conv.</th>
@@ -131,135 +159,113 @@ tbody td.num { text-align: right; font-variant-numeric: tabular-nums; }
     </div>
   </div>
 
-  <!-- TAB CHARTS -->
+  <!-- CHARTS -->
   <div class="tab-panel" id="tab-charts">
     <div class="charts-grid">
       <div class="chart-card">
         <div class="chart-title">Vendas por evento</div>
-        <div class="chart-sub">Ticket (Events) vs SPEX — eventos com receita registrada</div>
+        <div class="chart-sub">Ticket (Events) vs SPEX</div>
         <div class="legend">
-          <div class="legend-item"><div class="legend-dot" style="background:#185FA5"></div>Ticket (Events)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#185FA5"></div>Ticket</div>
           <div class="legend-item"><div class="legend-dot" style="background:#0F6E56"></div>SPEX</div>
         </div>
-        <div style="position:relative;" id="salesWrap">
-          <canvas id="salesChart" role="img" aria-label="Vendas por evento separadas em Ticket e SPEX"></canvas>
-        </div>
+        <div style="position:relative" id="salesWrap"><canvas id="salesChart"></canvas></div>
       </div>
       <div class="chart-card">
         <div class="chart-title">Top 15 — mais membros</div>
-        <div class="chart-sub">Ranking dos eventos com mais members confirmados</div>
+        <div class="chart-sub">Eventos com mais members confirmados</div>
         <div class="legend">
-          <div class="legend-item"><div class="legend-dot" style="background:#185FA5"></div>1º lugar</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#185FA5"></div>1º</div>
           <div class="legend-item"><div class="legend-dot" style="background:#378ADD"></div>Top 3</div>
           <div class="legend-item"><div class="legend-dot" style="background:#B5D4F4"></div>Demais</div>
         </div>
-        <div style="position:relative;" id="membersWrap">
-          <canvas id="membersChart" role="img" aria-label="Top 15 eventos por número de members confirmados"></canvas>
-        </div>
+        <div style="position:relative" id="membersWrap"><canvas id="membersChart"></canvas></div>
       </div>
-      <div class="chart-card" style="grid-column: 1 / -1;">
+      <div class="chart-card full">
         <div class="chart-title">Ranking de conversão de Guests</div>
         <div class="chart-sub">Eventos que mais converteram Guests em opp won — cada contato contado uma vez</div>
         <div class="legend">
-          <div class="legend-item"><div class="legend-dot" style="background:#7C3AED"></div>1º lugar</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#7C3AED"></div>1º</div>
           <div class="legend-item"><div class="legend-dot" style="background:#A78BFA"></div>Top 3</div>
           <div class="legend-item"><div class="legend-dot" style="background:#DDD6FE"></div>Demais</div>
         </div>
-        <div style="position:relative;height:320px;" id="convWrap">
-          <canvas id="convChart" role="img" aria-label="Ranking de eventos por conversão de guests"></canvas>
-        </div>
+        <div style="position:relative;height:300px" id="convWrap"><canvas id="convChart"></canvas></div>
       </div>
     </div>
   </div>
 
-  <div class="footer">GRI Europe Division · Gerado em maio 2026 · Confidencial</div>
+  <!-- MEDIA -->
+  <div class="tab-panel" id="tab-media">
+    <div class="media-grid">
+      <div class="media-card">
+        <h3>Tempo médio de conversão — Europa</h3>
+        <p>Da data do evento à data de fechamento da primeira opp won do guest</p>
+        <div class="stat-big">18 dias</div>
+        <div class="stat-sub">média geral</div>
+        <div class="stat-range">Mín: 5 dias &nbsp;·&nbsp; Máx: 51 dias &nbsp;·&nbsp; 16 conversões</div>
+        <div class="note-box">Baseado nos guests que tiveram opp won após participar como Guest. A mediana é mais representativa quando há outliers.</div>
+      </div>
+      <div class="media-card">
+        <h3>Tempo médio por país</h3>
+        <p>Média de dias entre o evento e a opp won — cada guest contado uma vez</p>
+        <table class="cst">
+          <thead><tr><th>País</th><th class="r">Média</th><th class="r">Conversões</th><th style="width:120px"></th></tr></thead>
+          <tbody>
+            <tr><td>Czech Republic</td><td class="r"><strong>5</strong> dias</td><td class="r" style="color:#888">1</td><td><div style="display:flex;align-items:center;gap:8px"><div class="bar-track"><div class="bar-fill" style="width:14%"></div></div></div></td></tr><tr><td>Spain</td><td class="r"><strong>10</strong> dias</td><td class="r" style="color:#888">2</td><td><div style="display:flex;align-items:center;gap:8px"><div class="bar-track"><div class="bar-fill" style="width:29%"></div></div></div></td></tr><tr><td>UK</td><td class="r"><strong>15</strong> dias</td><td class="r" style="color:#888">8</td><td><div style="display:flex;align-items:center;gap:8px"><div class="bar-track"><div class="bar-fill" style="width:43%"></div></div></div></td></tr><tr><td>Germany</td><td class="r"><strong>28</strong> dias</td><td class="r" style="color:#888">3</td><td><div style="display:flex;align-items:center;gap:8px"><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div></div></td></tr><tr><td>France</td><td class="r"><strong>34</strong> dias</td><td class="r" style="color:#888">1</td><td><div style="display:flex;align-items:center;gap:8px"><div class="bar-track"><div class="bar-fill" style="width:97%"></div></div></div></td></tr><tr><td>Poland</td><td class="r"><strong>35</strong> dias</td><td class="r" style="color:#888">1</td><td><div style="display:flex;align-items:center;gap:8px"><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOT CONVERTED -->
+  <div class="tab-panel" id="tab-notconv">
+    <div class="nc-filters">
+      <div><label>País </label><select id="ncCountry" onchange="renderNC()"><option value="">Todos os países</option></select></div>
+      <div><label>Responsável </label><select id="ncResp" onchange="renderNC()"><option value="">Todos</option></select></div>
+      <div><input type="text" id="ncSearch" placeholder="Buscar contato ou empresa..." oninput="renderNC()" style="font-size:13px;padding:6px 10px;border-radius:7px;border:1px solid #ddd;outline:none;width:220px"></div>
+    </div>
+    <div class="nc-summary">
+      <div class="nc-metric"><div class="nc-metric-label">Guests não convertidos</div><div class="nc-metric-value" id="nc-total">—</div></div>
+      <div class="nc-metric"><div class="nc-metric-label">Eventos</div><div class="nc-metric-value" id="nc-events">—</div></div>
+      <div class="nc-metric"><div class="nc-metric-label">Responsáveis</div><div class="nc-metric-value" id="nc-resps">—</div></div>
+    </div>
+    <div id="nc-body"></div>
+  </div>
+
+  <div class="footer">GRI Europe Division · Confidencial · 2026</div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const DATA = [{"Country": "Czech Republic", "Event Name": "CEE Living Assets", "City": "Prague", "Event Date": "23 April 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 12, "Member": 11, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "France", "Event Name": "C-Circle Takeaways France", "City": "", "Event Date": "16 June 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 5, "Total Amount": 5249.94, "SPEX Amount": 5249.94, "Sub Type": ""}, {"Country": "France", "Event Name": "C-circle Private Discussion - Europe GRI Summer Edition", "City": "Paris", "Event Date": "9 September 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 4, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "France", "Event Name": "Coup d'envoi du Marché Immobilier 2026", "City": "Neuilly-sur-Seine", "Event Date": "15 January 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 46, "Member": 51, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "France", "Event Name": "Europe GRI 2026 - Summer Edition", "City": "Paris", "Event Date": "9 - 10 September 2026", "Event Type": "Open Event", "Co-chair": 2, "Delegate": 23, "Guest": 1, "Member": 127, "Total Amount": 144089.55, "SPEX Amount": 47336.13, "Sub Type": "GRI Summit"}, {"Country": "France", "Event Name": "Financement, Dette et Fiducie Immobilière en France", "City": "Paris", "Event Date": "9 April 2026", "Event Type": "Club Event", "Co-chair": 1, "Delegate": 0, "Guest": 13, "Member": 16, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "France", "Event Name": "France GRI 2026", "City": "Paris", "Event Date": "28 May 2026", "Event Type": "Open Event", "Co-chair": 5, "Delegate": 9, "Guest": 7, "Member": 103, "Total Amount": 39277.57, "SPEX Amount": 22814.75, "Sub Type": "GRI Conference"}, {"Country": "France", "Event Name": "GRI Run Paris 2026", "City": "Paris", "Event Date": "9 September 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 6, "Total Amount": 3518.83, "SPEX Amount": 3518.83, "Sub Type": "GRI Experience"}, {"Country": "France", "Event Name": "Padel Experience Europe GRI 2026 - Summer Edition", "City": "Paris", "Event Date": "8 September 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 2, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Experience"}, {"Country": "France", "Event Name": "Résidentiel Géré et Hôtels France 2026", "City": "Paris", "Event Date": "26 March 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 7, "Member": 33, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "France", "Event Name": "Site Visits Europe GRI 2026 - Summer Edition", "City": "Paris", "Event Date": "8 September 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 4, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Experience"}, {"Country": "France", "Event Name": "Speed Networking Session: Newcomers Europe GRI 2026 - Summer Edition", "City": "", "Event Date": "9 September 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 1, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Experience"}, {"Country": "France", "Event Name": "Urbanisme, stratégies fiscales et nouveaux usages immobiliers", "City": "Paris", "Event Date": "18 June 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 5, "Member": 25, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "France", "Event Name": "Women Leading European Real Estate - Summer Edition", "City": "Paris", "Event Date": "8 September 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 9, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Germany", "Event Name": "Deutsche GRI 2026", "City": "Frankfurt", "Event Date": "28 April 2026", "Event Type": "Open Event", "Co-chair": 19, "Delegate": 33, "Guest": 10, "Member": 61, "Total Amount": 113850.02, "SPEX Amount": 0, "Sub Type": "GRI Conference"}, {"Country": "Germany", "Event Name": "Deutsche Wohnen GRI 2026", "City": "Frankfurt", "Event Date": "25 November 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 3, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Conference"}, {"Country": "Germany", "Event Name": "GRI Chairmen's Retreat Takeaways - Germany 2026", "City": "Frankfurt", "Event Date": "29 January 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 7, "Member": 14, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Germany", "Event Name": "German CRE Forum", "City": "Frankfurt", "Event Date": "18 June 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 2, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Forum"}, {"Country": "Germany", "Event Name": "German Economic Series 2026", "City": "Frankfurt", "Event Date": "2 December 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 1, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Germany", "Event Name": "Germany's C-Circle Gathering", "City": "Frankfurt am Main", "Event Date": "27 April 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 10, "Member": 24, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Germany", "Event Name": "The Beds Ecosystem in Germany - Hospitality Meets Residential", "City": "Berlin", "Event Date": "25 March 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 25, "Member": 9, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Germany", "Event Name": "Women Leading German Real Estate 2026", "City": "Frankfurt am Main", "Event Date": "27 April 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 11, "Member": 9, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Italy", "Event Name": "GRI Hospitality Europe 2026", "City": "Milano", "Event Date": "15 October 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 20, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Conference"}, {"Country": "Italy", "Event Name": "Italia GRI 2026", "City": "Milano", "Event Date": "14 May 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 19, "Guest": 1, "Member": 94, "Total Amount": 31194.27, "SPEX Amount": 0, "Sub Type": "GRI Conference"}, {"Country": "Italy", "Event Name": "Italian Commercial RE 2026", "City": "Milan", "Event Date": "18 June 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 13, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Forum"}, {"Country": "Italy", "Event Name": "Italy 2026 Economic Series", "City": "Milan", "Event Date": "10 December 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 1, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Italy", "Event Name": "Italy BTR & PBSA 2026", "City": "Milan", "Event Date": "3 March 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 2, "Member": 24, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Italy", "Event Name": "Italy Luxury Hotels & Branded Resi", "City": "Rome", "Event Date": "14 April 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 2, "Guest": 7, "Member": 22, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Italy", "Event Name": "Site Visits GRI Hospitality Europe 2026", "City": "Milan", "Event Date": "14 October 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 1, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Experience"}, {"Country": "Italy", "Event Name": "Site Visits Italia GRI 2026", "City": "Milano", "Event Date": "13 May 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 1, "Guest": 4, "Member": 29, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Experience"}, {"Country": "Poland", "Event Name": "CEE Capital Flows - Foreign & Domestic RE Investments", "City": "Warsaw", "Event Date": "23 June 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 2, "Member": 17, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Poland", "Event Name": "CEE Commercial Real Estate Forum", "City": "Warsaw", "Event Date": "26 March 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 18, "Member": 9, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Poland", "Event Name": "CEE GRI 2026", "City": "Warszawa", "Event Date": "19 May 2026", "Event Type": "Open Event", "Co-chair": 1, "Delegate": 19, "Guest": 10, "Member": 46, "Total Amount": 39453.63, "SPEX Amount": 0, "Sub Type": "GRI Conference"}, {"Country": "Poland", "Event Name": "GRI Polish Forum", "City": "Warsaw", "Event Date": "20 October 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 1, "Guest": 0, "Member": 1, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Forum"}, {"Country": "Poland", "Event Name": "Women Leading CEE Real Estate 2026", "City": "Warsaw", "Event Date": "18 May 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 34, "Guest": 6, "Member": 10, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Portugal", "Event Name": "Ibero GRI 2026", "City": "Lisboa", "Event Date": "2 - 3 June 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 1, "Guest": 2, "Member": 82, "Total Amount": 2089.9, "SPEX Amount": 0, "Sub Type": "GRI Conference"}, {"Country": "Portugal", "Event Name": "Offices Investments & Mixed-Use Strategies in Portugal", "City": "Lisbon", "Event Date": "22 September 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 2, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Forum"}, {"Country": "Portugal", "Event Name": "Portugal GRI 2026", "City": "Lisboa", "Event Date": "2 June 2026", "Event Type": "Open Event", "Co-chair": 1, "Delegate": 4, "Guest": 1, "Member": 73, "Total Amount": 7818.0, "SPEX Amount": 0, "Sub Type": "GRI Conference"}, {"Country": "Portugal", "Event Name": "Portuguese Affordability & PBSA Investments", "City": "Lisboa", "Event Date": "4 March 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 11, "Member": 11, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Forum"}, {"Country": "Portugal", "Event Name": "Portuguese Hospitality & Residential Investments", "City": "Lisbon", "Event Date": "20 October 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 3, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Forum"}, {"Country": "Portugal", "Event Name": "Women Leading Portuguese Real Estate 2026", "City": "Lisbon", "Event Date": "2 June 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 4, "Member": 5, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Spain", "Event Name": "Espana GRI 2026", "City": "Madrid", "Event Date": "29 - 30 April 2026", "Event Type": "Open Event", "Co-chair": 1, "Delegate": 11, "Guest": 3, "Member": 79, "Total Amount": 54868.24, "SPEX Amount": 31348.51, "Sub Type": "GRI Conference"}, {"Country": "Spain", "Event Name": "GRI Living Assets Southern Europe 2026", "City": "Madrid", "Event Date": "28 - 29 April 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 3, "Guest": 4, "Member": 82, "Total Amount": 11554.81, "SPEX Amount": 0, "Sub Type": "GRI Conference"}, {"Country": "Spain", "Event Name": "Hospitality Investments in Spain", "City": "Madrid", "Event Date": "24 September 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 10, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Spain", "Event Name": "Site Visits GRI Living Southern Europe 2026", "City": "Madrid", "Event Date": "28 April 2026", "Event Type": "Experience", "Co-chair": 0, "Delegate": 0, "Guest": 2, "Member": 27, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "Spain", "Event Name": "Spain Economics & RE Investments", "City": "Madrid", "Event Date": "12 February 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 9, "Member": 20, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Forum"}, {"Country": "Spain", "Event Name": "Spanish Commercial Real Estate Forum", "City": "Madrid", "Event Date": "30 June 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 12, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Forum"}, {"Country": "Spain", "Event Name": "Spanish Housing & Flexible Living Models", "City": "Madrid", "Event Date": "22 October 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 12, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Forum"}, {"Country": "Spain", "Event Name": "Spanish Value-Add & Mixed-Use Investments", "City": "Madrid", "Event Date": "26 March 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 5, "Member": 19, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Forum"}, {"Country": "Switzerland", "Event Name": "GRI Chairmen's Retreat 2026 - Europe Edition", "City": "St. Moritz", "Event Date": "15 - 18 January 2026", "Event Type": "Chairmen's Retreat", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 118, "Total Amount": 75350.32, "SPEX Amount": 18195.63, "Sub Type": "Europe"}, {"Country": "UK", "Event Name": "AI and Real Estate: Driving transformation & sustainability", "City": "", "Event Date": "9 June 2026", "Event Type": "eMeeting", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 8, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "UK", "Event Name": "C-Circle Experience - London Summer Edition - Hosted by Accor", "City": "London", "Event Date": "24 June 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 7, "Member": 9, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Experience"}, {"Country": "UK", "Event Name": "C-Circle Reunion 2026 - Winter Edition", "City": "London", "Event Date": "25 February 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 1, "Member": 29, "Total Amount": 4000, "SPEX Amount": 4000, "Sub Type": ""}, {"Country": "UK", "Event Name": "CEE & Polish Real Estate Forum 2026 - London Edition", "City": "London", "Event Date": "25 February 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 1, "Guest": 7, "Member": 28, "Total Amount": 4000, "SPEX Amount": 4000, "Sub Type": "GRI Forum"}, {"Country": "UK", "Event Name": "Europe GRI 2026 - Winter Edition", "City": "London", "Event Date": "26 February 2026", "Event Type": "Open Event", "Co-chair": 2, "Delegate": 31, "Guest": 11, "Member": 232, "Total Amount": 110318, "SPEX Amount": 28760, "Sub Type": "GRI Summit"}, {"Country": "UK", "Event Name": "GRI Chairmen's Retreat Takeaways - UK 2026", "City": "London", "Event Date": "28 January 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 3, "Member": 7, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "UK", "Event Name": "GRI Commercial RE & Data Centres Europe 2026", "City": "London", "Event Date": "18 November 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 16, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Conference"}, {"Country": "UK", "Event Name": "GRI Credit Opportunities & RE Debt 2026", "City": "London", "Event Date": "19 November 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 7, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Conference"}, {"Country": "UK", "Event Name": "GRI Living Assets Europe 2026", "City": "London", "Event Date": "25 June 2026", "Event Type": "Open Event", "Co-chair": 1, "Delegate": 5, "Guest": 5, "Member": 113, "Total Amount": 10075, "SPEX Amount": 0, "Sub Type": "GRI Conference"}, {"Country": "UK", "Event Name": "GRI Padel Experience 2026 - London Edition", "City": "London", "Event Date": "24 June 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 7, "Total Amount": 7000, "SPEX Amount": 7000, "Sub Type": "GRI Experience"}, {"Country": "UK", "Event Name": "GRI Women Leading European RE 2026", "City": "London", "Event Date": "24 February 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 1, "Guest": 18, "Member": 46, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Conference"}, {"Country": "UK", "Event Name": "Jazz & Dinner Experience - Winter Edition", "City": "London", "Event Date": "25 February 2026", "Event Type": "Experience", "Co-chair": 0, "Delegate": 0, "Guest": 4, "Member": 27, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "UK", "Event Name": "LP's Committee - Europe", "City": "London", "Event Date": "24 June 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 1, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "UK", "Event Name": "Pan-European CRE Logistics & Data Centres Investment Deals", "City": "London", "Event Date": "12 May 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 12, "Member": 61, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "UK", "Event Name": "Pan-European Equity & Debt Strategies", "City": "London", "Event Date": "6 May 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 7, "Member": 49, "Total Amount": 5000, "SPEX Amount": 5000, "Sub Type": ""}, {"Country": "UK", "Event Name": "Site Visits - GRI Living Assets Europe 2026", "City": "London", "Event Date": "24 June 2026", "Event Type": "Open Event", "Co-chair": 0, "Delegate": 0, "Guest": 0, "Member": 8, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": "GRI Experience"}, {"Country": "UK", "Event Name": "Site Visits Europe GRI 2026 - Winter Edition", "City": "London", "Event Date": "25 February 2026", "Event Type": "Experience", "Co-chair": 0, "Delegate": 0, "Guest": 2, "Member": 30, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "UK", "Event Name": "UK Living Transactions", "City": "London", "Event Date": "24 March 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 8, "Member": 15, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}, {"Country": "UK", "Event Name": "Women Leading European Real Estate - London Summer Edition 2026", "City": "London", "Event Date": "24 June 2026", "Event Type": "Club Event", "Co-chair": 0, "Delegate": 0, "Guest": 8, "Member": 17, "Total Amount": 0, "SPEX Amount": 0, "Sub Type": ""}];
+const DATA = [{"Event Name": "CEE Living Assets", "Country": "Czech Republic", "City": "Prague", "Event Type": "Club Event", "Sub Type": "", "Event Date": "23 April 2026", "Member": 11, "Guest": 12, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 1, "Converted Amount": 12000.0}, {"Event Name": "C-Circle Takeaways France", "Country": "France", "City": "", "Event Type": "Club Event", "Sub Type": "", "Event Date": "16 June 2026", "Member": 5, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 6000.0, "SPEX Amount": 6000.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "C-circle Private Discussion - Europe GRI Summer Edition", "Country": "France", "City": "Paris", "Event Type": "Club Event", "Sub Type": "", "Event Date": "9 September 2026", "Member": 4, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Coup d’envoi du Marché Immobilier 2026", "Country": "France", "City": "Neuilly-sur-Seine", "Event Type": "Open Event", "Sub Type": "GRI Forum", "Event Date": "15 January 2026", "Member": 51, "Guest": 46, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Europe GRI 2026 - Summer Edition", "Country": "France", "City": "Paris", "Event Type": "Open Event", "Sub Type": "GRI Summit", "Event Date": "9 - 10 September 2026", "Member": 127, "Guest": 1, "Co-chair": 2, "Delegate": 23, "Total Amount": 65417.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Financement, Dette et Fiducie Immobilière en France", "Country": "France", "City": "Paris", "Event Type": "Club Event", "Sub Type": "", "Event Date": "9 April 2026", "Member": 16, "Guest": 13, "Co-chair": 1, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "France GRI 2026", "Country": "France", "City": "Paris", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "28 May 2026", "Member": 103, "Guest": 7, "Co-chair": 5, "Delegate": 9, "Total Amount": 39800.0, "SPEX Amount": 24600.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "GRI Run Paris 2026", "Country": "France", "City": "Paris", "Event Type": "Open Event", "Sub Type": "GRI Experience", "Event Date": "9 September 2026", "Member": 6, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Padel Experience Europe GRI 2026 - Summer Edition", "Country": "France", "City": "Paris", "Event Type": "Open Event", "Sub Type": "GRI Experience", "Event Date": "8 September 2026", "Member": 2, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Résidentiel Géré et Hôtels France 2026", "Country": "France", "City": "Paris", "Event Type": "Club Event", "Sub Type": "", "Event Date": "26 March 2026", "Member": 33, "Guest": 7, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Site Visits Europe GRI 2026 - Summer Edition", "Country": "France", "City": "Paris", "Event Type": "Open Event", "Sub Type": "GRI Experience", "Event Date": "8 September 2026", "Member": 4, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Speed Networking Session: Newcomers Europe GRI 2026 - Summer Edition", "Country": "France", "City": "", "Event Type": "Open Event", "Sub Type": "GRI Experience", "Event Date": "9 September 2026", "Member": 1, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Urbanisme, stratégies fiscales et nouveaux usages immobiliers", "Country": "France", "City": "Paris", "Event Type": "Club Event", "Sub Type": "", "Event Date": "18 June 2026", "Member": 25, "Guest": 5, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Women Leading European Real Estate - Summer Edition", "Country": "France", "City": "Paris", "Event Type": "Club Event", "Sub Type": "", "Event Date": "8 September 2026", "Member": 9, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Deutsche GRI 2026", "Country": "Germany", "City": "Frankfurt", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "28 April 2026", "Member": 61, "Guest": 10, "Co-chair": 19, "Delegate": 33, "Total Amount": 86605.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Deutsche Wohnen GRI 2026", "Country": "Germany", "City": "Frankfurt", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "25 November 2026", "Member": 3, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "GRI Chairmen’s Retreat Takeaways - Germany 2026", "Country": "Germany", "City": "Frankfurt", "Event Type": "Club Event", "Sub Type": "", "Event Date": "29 January 2026", "Member": 14, "Guest": 7, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "German CRE Forum", "Country": "Germany", "City": "Frankfurt", "Event Type": "Open Event", "Sub Type": "GRI Forum", "Event Date": "18 June 2026", "Member": 2, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "German Economic Series 2026", "Country": "Germany", "City": "Frankfurt", "Event Type": "Club Event", "Sub Type": "", "Event Date": "2 December 2026", "Member": 1, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Germany’s C-Circle Gathering", "Country": "Germany", "City": "Frankfurt am Main", "Event Type": "Club Event", "Sub Type": "", "Event Date": "27 April 2026", "Member": 24, "Guest": 10, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "The Beds Ecosystem in Germany - Hospitality Meets Residential", "Country": "Germany", "City": "Berlin", "Event Type": "Club Event", "Sub Type": "", "Event Date": "25 March 2026", "Member": 9, "Guest": 25, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 2, "Converted Amount": 10495.0}, {"Event Name": "Women Leading German Real Estate 2026", "Country": "Germany", "City": "Frankfurt am Main", "Event Type": "Club Event", "Sub Type": "", "Event Date": "27 April 2026", "Member": 9, "Guest": 11, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "GRI Hospitality Europe 2026", "Country": "Italy", "City": "Milano", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "15 October 2026", "Member": 20, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Italia GRI 2026", "Country": "Italy", "City": "Milano", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "14 May 2026", "Member": 94, "Guest": 1, "Co-chair": 0, "Delegate": 19, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Italian Commercial RE 2026", "Country": "Italy", "City": "Milan", "Event Type": "Open Event", "Sub Type": "GRI Forum", "Event Date": "18 June 2026", "Member": 13, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Italy 2026 Economic Series", "Country": "Italy", "City": "Milan", "Event Type": "Club Event", "Sub Type": "", "Event Date": "10 December 2026", "Member": 1, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Italy BTR & PBSA 2026", "Country": "Italy", "City": "Milan", "Event Type": "Club Event", "Sub Type": "", "Event Date": "3 March 2026", "Member": 24, "Guest": 2, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Italy Luxury Hotels & Branded Resi", "Country": "Italy", "City": "Rome", "Event Type": "Club Event", "Sub Type": "", "Event Date": "14 April 2026", "Member": 22, "Guest": 7, "Co-chair": 0, "Delegate": 2, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Site Visits GRI Hospitality Europe 2026", "Country": "Italy", "City": "Milan", "Event Type": "Open Event", "Sub Type": "GRI Experience", "Event Date": "14 October 2026", "Member": 1, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Site Visits Italia GRI 2026", "Country": "Italy", "City": "Milano", "Event Type": "Open Event", "Sub Type": "GRI Experience", "Event Date": "13 May 2026", "Member": 29, "Guest": 4, "Co-chair": 0, "Delegate": 1, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "CEE Capital Flows - Foreign & Domestic RE Investments", "Country": "Poland", "City": "Warsaw", "Event Type": "Club Event", "Sub Type": "", "Event Date": "23 June 2026", "Member": 17, "Guest": 2, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "CEE Commercial Real Estate Forum", "Country": "Poland", "City": "Warsaw", "Event Type": "Club Event", "Sub Type": "", "Event Date": "26 March 2026", "Member": 9, "Guest": 18, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 1, "Converted Amount": 9600.0}, {"Event Name": "CEE GRI 2026", "Country": "Poland", "City": "Warszawa", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "19 May 2026", "Member": 46, "Guest": 10, "Co-chair": 1, "Delegate": 19, "Total Amount": 30830.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "GRI Polish Forum", "Country": "Poland", "City": "Warsaw", "Event Type": "Open Event", "Sub Type": "GRI Forum", "Event Date": "20 October 2026", "Member": 1, "Guest": 0, "Co-chair": 0, "Delegate": 1, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Women Leading CEE Real Estate 2026", "Country": "Poland", "City": "Warsaw", "Event Type": "Club Event", "Sub Type": "", "Event Date": "18 May 2026", "Member": 10, "Guest": 6, "Co-chair": 0, "Delegate": 34, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Ibero GRI 2026", "Country": "Portugal", "City": "Lisboa", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "2 - 3 June 2026", "Member": 82, "Guest": 2, "Co-chair": 0, "Delegate": 1, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Offices Investments & Mixed-Use Strategies in Portugal", "Country": "Portugal", "City": "Lisbon", "Event Type": "Open Event", "Sub Type": "GRI Forum", "Event Date": "22 September 2026", "Member": 2, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Portugal GRI 2026", "Country": "Portugal", "City": "Lisboa", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "2 June 2026", "Member": 73, "Guest": 1, "Co-chair": 1, "Delegate": 4, "Total Amount": 7400.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Portuguese Affordability & PBSA Investments", "Country": "Portugal", "City": "Lisboa", "Event Type": "Open Event", "Sub Type": "GRI Forum", "Event Date": "4 March 2026", "Member": 11, "Guest": 11, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Portuguese Hospitality & Residential Investments", "Country": "Portugal", "City": "Lisbon", "Event Type": "Open Event", "Sub Type": "GRI Forum", "Event Date": "20 October 2026", "Member": 3, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Women Leading Portuguese Real Estate 2026", "Country": "Portugal", "City": "Lisbon", "Event Type": "Club Event", "Sub Type": "", "Event Date": "2 June 2026", "Member": 5, "Guest": 4, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Espana GRI 2026", "Country": "Spain", "City": "Madrid", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "29 - 30 April 2026", "Member": 79, "Guest": 3, "Co-chair": 1, "Delegate": 11, "Total Amount": 28200.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "GRI Living Assets Southern Europe 2026", "Country": "Spain", "City": "Madrid", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "28 - 29 April 2026", "Member": 82, "Guest": 4, "Co-chair": 0, "Delegate": 3, "Total Amount": 10000.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Hospitality Investments in Spain", "Country": "Spain", "City": "Madrid", "Event Type": "Club Event", "Sub Type": "", "Event Date": "24 September 2026", "Member": 10, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Site Visits GRI Living Southern Europe 2026", "Country": "Spain", "City": "Madrid", "Event Type": "Experience", "Sub Type": "", "Event Date": "28 April 2026", "Member": 27, "Guest": 2, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Spain Economics & RE Investments", "Country": "Spain", "City": "Madrid", "Event Type": "Open Event", "Sub Type": "GRI Forum", "Event Date": "12 February 2026", "Member": 20, "Guest": 9, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 1, "Converted Amount": 5000.0}, {"Event Name": "Spanish Commercial Real Estate Forum", "Country": "Spain", "City": "Madrid", "Event Type": "Open Event", "Sub Type": "GRI Forum", "Event Date": "30 June 2026", "Member": 12, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Spanish Housing & Flexible Living Models", "Country": "Spain", "City": "Madrid", "Event Type": "Open Event", "Sub Type": "GRI Forum", "Event Date": "22 October 2026", "Member": 12, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Spanish Value-Add & Mixed-Use Investments", "Country": "Spain", "City": "Madrid", "Event Type": "Open Event", "Sub Type": "GRI Forum", "Event Date": "26 March 2026", "Member": 19, "Guest": 5, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 1, "Converted Amount": 7000.0}, {"Event Name": "GRI Chairmen's Retreat 2026 - Europe Edition", "Country": "Switzerland", "City": "St. Moritz", "Event Type": "Chairmen’s Retreat", "Sub Type": "Europe", "Event Date": "15 - 18 January 2026", "Member": 118, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "AI and Real Estate: Driving transformation & sustainability", "Country": "UK", "City": "", "Event Type": "eMeeting", "Sub Type": "", "Event Date": "9 June 2026", "Member": 8, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "C-Circle Experience - London Summer Edition - Hosted by Accor", "Country": "UK", "City": "London", "Event Type": "Open Event", "Sub Type": "GRI Experience", "Event Date": "24 June 2026", "Member": 9, "Guest": 7, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "C-Circle Reunion 2026 - Winter Edition", "Country": "UK", "City": "London", "Event Type": "Club Event", "Sub Type": "", "Event Date": "25 February 2026", "Member": 29, "Guest": 1, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "CEE & Polish Real Estate Forum 2026 - London Edition", "Country": "UK", "City": "London", "Event Type": "Open Event", "Sub Type": "GRI Forum", "Event Date": "25 February 2026", "Member": 28, "Guest": 7, "Co-chair": 0, "Delegate": 1, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 3, "Converted Amount": 14545.0}, {"Event Name": "Europe GRI 2026 - Winter Edition", "Country": "UK", "City": "London", "Event Type": "Open Event", "Sub Type": "GRI Summit", "Event Date": "26 February 2026", "Member": 232, "Guest": 11, "Co-chair": 2, "Delegate": 31, "Total Amount": 47358.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "GRI Chairmen’s Retreat Takeaways - UK 2026", "Country": "UK", "City": "London", "Event Type": "Club Event", "Sub Type": "", "Event Date": "28 January 2026", "Member": 7, "Guest": 3, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "GRI Commercial RE & Data Centres Europe 2026", "Country": "UK", "City": "London", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "18 November 2026", "Member": 16, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "GRI Credit Opportunities & RE Debt 2026", "Country": "UK", "City": "London", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "19 November 2026", "Member": 7, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "GRI Living Assets Europe 2026", "Country": "UK", "City": "London", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "25 June 2026", "Member": 113, "Guest": 5, "Co-chair": 1, "Delegate": 5, "Total Amount": 3390.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "GRI Padel Experience 2026 - London Edition", "Country": "UK", "City": "London", "Event Type": "Open Event", "Sub Type": "GRI Experience", "Event Date": "24 June 2026", "Member": 7, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "GRI Women Leading European RE 2026", "Country": "UK", "City": "London", "Event Type": "Open Event", "Sub Type": "GRI Conference", "Event Date": "24 February 2026", "Member": 46, "Guest": 18, "Co-chair": 0, "Delegate": 1, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 3, "Converted Amount": 29930.0}, {"Event Name": "Jazz & Dinner Experience - Winter Edition", "Country": "UK", "City": "London", "Event Type": "Experience", "Sub Type": "", "Event Date": "25 February 2026", "Member": 27, "Guest": 4, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "LP’s Committee - Europe", "Country": "UK", "City": "London", "Event Type": "Open Event", "Sub Type": "GRI Committe", "Event Date": "24 June 2026", "Member": 1, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Pan-European CRE Logistics & Data Centres Investment Deals", "Country": "UK", "City": "London", "Event Type": "Club Event", "Sub Type": "", "Event Date": "12 May 2026", "Member": 61, "Guest": 12, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Pan-European Equity & Debt Strategies", "Country": "UK", "City": "London", "Event Type": "Club Event", "Sub Type": "", "Event Date": "6 May 2026", "Member": 49, "Guest": 7, "Co-chair": 0, "Delegate": 0, "Total Amount": 5000.0, "SPEX Amount": 5000.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Site Visits - GRI Living Assets Europe 2026", "Country": "UK", "City": "London", "Event Type": "Open Event", "Sub Type": "GRI Experience", "Event Date": "24 June 2026", "Member": 8, "Guest": 0, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Site Visits Europe GRI 2026 - Winter Edition", "Country": "UK", "City": "London", "Event Type": "Experience", "Sub Type": "", "Event Date": "25 February 2026", "Member": 30, "Guest": 2, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 1, "Converted Amount": 20580.0}, {"Event Name": "UK Living Transactions", "Country": "UK", "City": "London", "Event Type": "Club Event", "Sub Type": "", "Event Date": "24 March 2026", "Member": 15, "Guest": 8, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}, {"Event Name": "Women Leading European Real Estate - London Summer Edition 2026", "Country": "UK", "City": "London", "Event Type": "Club Event", "Sub Type": "", "Event Date": "24 June 2026", "Member": 17, "Guest": 8, "Co-chair": 0, "Delegate": 0, "Total Amount": 0.0, "SPEX Amount": 0.0, "Converted Count": 0, "Converted Amount": 0}];
+const CONV = {"C-Circle Experience - London Summer Edition - Hosted by Accor": {"converted_count": 0, "converted_amount": 0}, "C-Circle Reunion 2026 - Winter Edition": {"converted_count": 0, "converted_amount": 0}, "CEE & Polish Real Estate Forum 2026 - London Edition": {"converted_count": 3, "converted_amount": 14545.0}, "CEE Capital Flows - Foreign & Domestic RE Investments": {"converted_count": 0, "converted_amount": 0}, "CEE Commercial Real Estate Forum": {"converted_count": 1, "converted_amount": 9600.0}, "CEE GRI 2026": {"converted_count": 0, "converted_amount": 0}, "CEE Living Assets": {"converted_count": 1, "converted_amount": 12000.0}, "Coup d?envoi du Marché Immobilier 2026": {"converted_count": 1, "converted_amount": 2300.0}, "Deutsche GRI 2026": {"converted_count": 0, "converted_amount": 0}, "Espana GRI 2026": {"converted_count": 0, "converted_amount": 0}, "Europe GRI 2026 - Summer Edition": {"converted_count": 0, "converted_amount": 0}, "Europe GRI 2026 - Winter Edition": {"converted_count": 0, "converted_amount": 0}, "Financement, Dette et Fiducie Immobilière en France": {"converted_count": 0, "converted_amount": 0}, "France GRI 2026": {"converted_count": 0, "converted_amount": 0}, "GRI Chairmen?s Retreat Takeaways - Germany 2026": {"converted_count": 1, "converted_amount": 2695.0}, "GRI Chairmen?s Retreat Takeaways - UK 2026": {"converted_count": 1, "converted_amount": 5000.0}, "GRI Living Assets Europe 2026": {"converted_count": 0, "converted_amount": 0}, "GRI Living Assets Southern Europe 2026": {"converted_count": 0, "converted_amount": 0}, "GRI Women Leading European RE 2026": {"converted_count": 3, "converted_amount": 29930.0}, "Germany?s C-Circle Gathering": {"converted_count": 0, "converted_amount": 0}, "Ibero GRI 2026": {"converted_count": 0, "converted_amount": 0}, "Italia GRI 2026": {"converted_count": 0, "converted_amount": 0}, "Italy BTR & PBSA 2026": {"converted_count": 0, "converted_amount": 0}, "Italy Luxury Hotels & Branded Resi": {"converted_count": 0, "converted_amount": 0}, "Jazz & Dinner Experience - Winter Edition": {"converted_count": 0, "converted_amount": 0}, "Pan-European CRE Logistics & Data Centres Investment Deals": {"converted_count": 0, "converted_amount": 0}, "Pan-European Equity & Debt Strategies": {"converted_count": 0, "converted_amount": 0}, "Portugal GRI 2026": {"converted_count": 0, "converted_amount": 0}, "Portuguese Affordability & PBSA Investments": {"converted_count": 0, "converted_amount": 0}, "Résidentiel Géré et Hôtels France 2026": {"converted_count": 0, "converted_amount": 0}, "Site Visits Europe GRI 2026 - Winter Edition": {"converted_count": 1, "converted_amount": 20580.0}, "Site Visits GRI Living Southern Europe 2026": {"converted_count": 0, "converted_amount": 0}, "Site Visits Italia GRI 2026": {"converted_count": 0, "converted_amount": 0}, "Spain Economics & RE Investments": {"converted_count": 1, "converted_amount": 5000.0}, "Spanish Value-Add & Mixed-Use Investments": {"converted_count": 1, "converted_amount": 7000.0}, "The Beds Ecosystem in Germany - Hospitality Meets Residential": {"converted_count": 2, "converted_amount": 10495.0}, "UK Living Transactions": {"converted_count": 0, "converted_amount": 0}, "Urbanisme, stratégies fiscales et nouveaux usages immobiliers": {"converted_count": 0, "converted_amount": 0}, "Women Leading CEE Real Estate 2026": {"converted_count": 0, "converted_amount": 0}, "Women Leading European Real Estate - London Summer Edition 2026": {"converted_count": 0, "converted_amount": 0}, "Women Leading German Real Estate 2026": {"converted_count": 0, "converted_amount": 0}, "Women Leading Portuguese Real Estate 2026": {"converted_count": 0, "converted_amount": 0}};
+const CONV_NAMES = {"CEE & Polish Real Estate Forum 2026 - London Edition": ["Maciej Tuszy?ski", "Sa?a Perko", "Simon Johnson"], "CEE Commercial Real Estate Forum": ["Piotr Gozdziewicz"], "CEE Living Assets": ["Jan Bedná?"], "Coup d?envoi du Marché Immobilier 2026": ["Cyrille Miallou"], "GRI Chairmen?s Retreat Takeaways - Germany 2026": ["Maximilian Sauermann"], "GRI Chairmen?s Retreat Takeaways - UK 2026": ["Crispin Gandy"], "GRI Women Leading European RE 2026": ["Joana Mestre", "Lucia Lassaletta", "Magda Pokorná"], "Site Visits Europe GRI 2026 - Winter Edition": ["Joana Mestre"], "Spain Economics & RE Investments": ["Felipe Perez"], "Spanish Value-Add & Mixed-Use Investments": ["Robin Decaux"], "The Beds Ecosystem in Germany - Hospitality Meets Residential": ["Alexander Müller", "Tobias Gollnest"]};
+const NOT_CONV = {"C-Circle Experience - London Summer Edition - Hosted by Accor": {"country": "UK", "contacts": [{"name": "David Douvin", "title": "Vice-President Global Development - Feasibility & Retention", "company": "Accor Hotels - UK", "responsible": "Ludwig Menke"}, {"name": "Caroline Bernard", "title": "Global SVP Strategic Partners and Prospects, Marketing & Communication Hotel Development", "company": "Accor Hotels - UK", "responsible": "Ludwig Menke"}, {"name": "Saurabh Chawla", "title": "Vice President", "company": "Westmont Hospitality Group", "responsible": "Ludwig Menke"}, {"name": "Natalia Kolotneva", "title": "Head of Living and Hospitality Europe", "company": "LaSalle Investment Management - UK", "responsible": "Ludwig Menke"}, {"name": "Jon Asumendi", "title": "Hotel Acquisitions", "company": "Starwood Capital - UK", "responsible": "Ludwig Menke"}]}, "C-Circle Reunion 2026 - Winter Edition": {"country": "UK", "contacts": [{"name": "Richard Steer", "title": "Chairman", "company": "Gleeds - London", "responsible": "Ludwig Menke"}]}, "CEE & Polish Real Estate Forum 2026 - London Edition": {"country": "UK", "contacts": [{"name": "Agata Jurkanis", "title": "", "company": "Loft Asset Management", "responsible": "Natalia Morandi"}, {"name": "Mateusz Skubiszewski", "title": "Head of Capital Markets", "company": "BNP Paribas Real Estate - Poland", "responsible": "Vitor Rocha"}, {"name": "Michal Pszkit", "title": "Board Member", "company": "BNP Paribas Real Estate - Poland", "responsible": "Vitor Rocha"}, {"name": "Maciej Tuszyński", "title": "Managing Director Europe", "company": "Fortress Logistics Real Estate", "responsible": "Vitor Rocha"}, {"name": "Saša Perko", "title": "CEO", "company": "DOMinvest d.o.o.", "responsible": "Vitor Rocha"}]}, "CEE Capital Flows - Foreign & Domestic RE Investments": {"country": "Poland", "contacts": [{"name": "Brendan Long", "title": "Head of Property", "company": "Santander Bank Polska", "responsible": "Vitor Rocha"}, {"name": "Oleg Fedulin", "title": "Associate Director, Senior Banker, Property and Tourism", "company": "European Bank for Reconstruction and Development", "responsible": "Vitor Rocha"}]}, "CEE Commercial Real Estate Forum": {"country": "Poland", "contacts": [{"name": "Hubert Manturzyk", "title": "General Manager CEE", "company": "Aareal Bank AG - Poland", "responsible": "Vitor Rocha"}, {"name": "Łukasz Pawikowski", "title": "Head of Asset Management CEE & Nordics", "company": "Manova Partners", "responsible": "Vitor Rocha"}, {"name": "Tom Lisiecki", "title": "CEO", "company": "TriGranit Development - Warsaw", "responsible": "Vitor Rocha"}, {"name": "Marek Jakubiak", "title": "Director Head of Real Estate CEE", "company": "DWS Group", "responsible": "Victor Heimann"}, {"name": "Agata Sekula", "title": "Chief Divestment & Investment Officer", "company": "Echo Polska Properties", "responsible": "Vitor Rocha"}, {"name": "Agnieszka Niezgodzka", "title": "Director - Asset Management", "company": "Accolade Group", "responsible": "Vitor Rocha"}, {"name": "Eran Levy", "title": "CEO", "company": "BIG-  Poland", "responsible": "Vitor Rocha"}, {"name": "Julia Racewicz", "title": "Country Manager, Poland", "company": "Eastnine", "responsible": "Vitor Rocha"}, {"name": "Piotr Trzciński", "title": "Head of Poland", "company": "Currently Unaffiliated", "responsible": "Juliana Pires"}, {"name": "Piotr Goclowski", "title": "Partner", "company": "CVI Doma Maklerski", "responsible": "Gabriel Ferraz"}, {"name": "Michał Bogaczyński", "title": "Head of Asset Management", "company": "P3 Logistic Parks - Poland", "responsible": "Vitor Rocha"}, {"name": "Marek Paczuski", "title": "Senior Director", "company": "Colliers International - CEE", "responsible": "Juliana Pires"}, {"name": "Andrzej Wronski", "title": "CEO", "company": "7R - Europe", "responsible": "Gabriel Ferraz"}, {"name": "Antonio Pomes", "title": "Country Head Poland, Portfolio Management", "company": "Revetas Capital", "responsible": "Gabriel Ferraz"}, {"name": "Marta Machus-Burek", "title": "Senior Partner Strategic Advisory, Board Vice President", "company": "Colliers International - CEE", "responsible": "Juliana Pires"}, {"name": "Monika Rajska-Wolinska", "title": "Chief Executive Officer, CEE", "company": "Colliers International - CEE", "responsible": "Juliana Pires"}]}, "CEE GRI 2026": {"country": "Poland", "contacts": [{"name": "Mateusz Urban", "title": "Senior Economist in European Macro Forecasting Team", "company": "Oxford Economics", "responsible": "**INACTIVE** Giovanna Paganini"}, {"name": "Georg Zaccaria", "title": "Head of Corporate & Sector Research | Capital Markets & ESG Research", "company": "Raiffeisen Bank International AG", "responsible": "Julien Geier"}, {"name": "Ben Bannatyne", "title": "President, Prologis Europe", "company": "Prologis - Europe", "responsible": "Julien Geier"}, {"name": "Katarzyna Zawodna-Bijoch", "title": "President and CEO", "company": "Skanska - Poland", "responsible": "Gabriel Ferraz"}, {"name": "Rafał Balewski", "title": "International Regional Manager Properties & Real Estate", "company": "FedEx Express", "responsible": "Julien Geier"}, {"name": "Sylwia Pyskiewicz", "title": "CEO", "company": "Equinix - Poland", "responsible": "Julien Geier"}, {"name": "Krzysztof Bocianowski", "title": "Expansion and Leasing Director", "company": "LPP S.A.", "responsible": "Julien Geier"}, {"name": "Rafał Mateusiak", "title": "President of the Management Board", "company": "Tower Inwestycje", "responsible": "Julien Geier"}, {"name": "Andrzej Potyra", "title": "Head of Property", "company": "Żabka Polska", "responsible": "Julien Geier"}, {"name": "Janis Klenk", "title": "", "company": "Oxford Economics", "responsible": "Julien Geier"}]}, "CEE Living Assets": {"country": "Czech Republic", "contacts": [{"name": "Maxim Vihorev", "title": "CEO & Founder", "company": "Vihorev Investments", "responsible": "Vitor Rocha"}, {"name": "Petr Vondrasek", "title": "Asset Management Director", "company": "FIDUROCK", "responsible": "Vitor Rocha"}, {"name": "Marek Blaha", "title": "CEO", "company": "Dostupné bydlení České Spořitelny", "responsible": "Vitor Rocha"}, {"name": "William Bucknell", "title": "Managing Director (Real Estate)", "company": "Flow East", "responsible": "Vitor Rocha"}, {"name": "Julius Meinl", "title": "CEO", "company": "Julius Meinl Living PLC", "responsible": "Vitor Rocha"}, {"name": "Tomas Picha", "title": "Senior Director  Transactions – Central & Eastern Europe", "company": "Invesco - Czech Republic", "responsible": "Vitor Rocha"}, {"name": "Barbora N Noskova", "title": "Owner", "company": "Bro-coli", "responsible": "Vitor Rocha"}, {"name": "Jan Rezab", "title": "Owner & Founder", "company": "JRD s.r.o.", "responsible": "Vitor Rocha"}, {"name": "Jana Seckarova, CRE", "title": "Partner", "company": "Natland", "responsible": "Vitor Rocha"}, {"name": "Libor Vošický", "title": "CEO", "company": "Česká spořitelna-penzijní společnost", "responsible": "Juliana Pires"}, {"name": "Lukáš Musil", "title": "Board Member", "company": "RSJ Investments", "responsible": "Vitor Rocha"}, {"name": "Jan Bednář", "title": "CEO", "company": "TKC GROUP", "responsible": "Vitor Rocha"}]}, "Coup d’envoi du Marché Immobilier 2026": {"country": "France", "contacts": [{"name": "Nicolas Biganzoli", "title": "Managing Director - Head of Investments France", "company": "Nuveen Real Estate - France", "responsible": "Ludwig Menke"}, {"name": "Marc-Olivier Assouline", "title": "Head of Value Add Europe", "company": "Columbia Threadneedle Real Estate Partners", "responsible": "Ludwig Menke"}, {"name": "Philippe Cervesi", "title": "President", "company": "Corum Asset Management - France", "responsible": "Ludwig Menke"}, {"name": "Rodrigo Clare", "title": "Directeur Général", "company": "Altarea", "responsible": "Ludwig Menke"}, {"name": "François Le Levier", "title": "Country Manager, France", "company": "WDP - France", "responsible": "Ludwig Menke"}, {"name": "Florence Chérel", "title": "Associé - Partner", "company": "CMS Francis Lefebvre - Paris", "responsible": "Ludwig Menke"}, {"name": "Olivier Ambrosiali", "title": "Directeur Général Adjoint", "company": "BNP Paribas Real Estate - France", "responsible": "**INACTIVE** Diana Paradela"}, {"name": "Henri Chavanne", "title": "Senior Asset Manager", "company": "CBRE - Paris", "responsible": "Ludwig Menke"}, {"name": "Pierre Ballu", "title": "DGA - Fund, Asset & Investment Management", "company": "AESTIAM", "responsible": "Ludwig Menke"}, {"name": "Christoph Erven", "title": "Président, France", "company": "Real I.S. AG - France", "responsible": "Ludwig Menke"}, {"name": "Cédric Poittevin", "title": "Directeur général", "company": "Soposa", "responsible": "Ludwig Menke"}, {"name": "Benjamin Chiche", "title": "Deputy Head of Hotels", "company": "Schroders Capital", "responsible": "Ludwig Menke"}, {"name": "Jean de Beaufort", "title": "Asset Management", "company": "STAM Europe - Headquarters", "responsible": "Ludwig Menke"}, {"name": "Lawrence Delahaye", "title": "Directeur investissement groupe", "company": "Constructa Asset Management", "responsible": "Ludwig Menke"}, {"name": "Mathieu Latil", "title": "Director, Asset & Investment Management", "company": "Invesco Real Estate", "responsible": "Ludwig Menke"}, {"name": "Olivier Eglem", "title": "Head of Funds & Investments", "company": "PAREF Group", "responsible": "Ludwig Menke"}, {"name": "Pierre Estragues", "title": "Value-add", "company": "Columbia Threadneedle", "responsible": "Ludwig Menke"}, {"name": "Manon Henry", "title": "Tertiary Project Developer", "company": "Aurelis Real Estate GmbH & Co. KG", "responsible": "Ludwig Menke"}, {"name": "Morgan Vincent", "title": "", "company": "Stoneweg", "responsible": "Ludwig Menke"}, {"name": "Jean Fraissinet", "title": "Investment Manager", "company": "Ofi Invest Real Estate", "responsible": "Ludwig Menke"}, {"name": "Roman Cochet", "title": "Investment Manager", "company": "Ofi Invest Real Estate", "responsible": "Ludwig Menke"}, {"name": "Jonathan Manaut", "title": "Senior Asset Manager", "company": "BNP Paribas Real Estate - France", "responsible": "Ludwig Menke"}, {"name": "Alexandra Vaquin", "title": "Head of Acquisitions", "company": "STAM Europe - Headquarters", "responsible": "Ludwig Menke"}, {"name": "Maxime Plouviez", "title": "Senior Transaction Manager", "company": "Columbia Threadneedle Real Estate Partners", "responsible": "Ludwig Menke"}, {"name": "Arthur Brizard", "title": "Directeur Investissement Adjoint", "company": "La Française REM", "responsible": "Ludwig Menke"}, {"name": "Margaux Castro Rodrigues", "title": "Development & Construction Manager", "company": "EQT Real Estate", "responsible": "Ludwig Menke"}, {"name": "Daniel Radermacher", "title": "Director Asset Management", "company": "REInvest Asset Management", "responsible": "Ludwig Menke"}, {"name": "Florian Hermessan", "title": "Investment Manager", "company": "UBS Asset Management - France", "responsible": "Ludwig Menke"}, {"name": "Semih Bayar Eren", "title": "Directeur Général and Partner", "company": "Greycoat Real Estate LLP", "responsible": "Ludwig Menke"}, {"name": "Katia Nait Bouda", "title": "Senior Asset Manager", "company": "Union Investment", "responsible": "Ludwig Menke"}, {"name": "Christophe Ramos", "title": "VP, Head of Development Management Southern Europe", "company": "Prologis - France", "responsible": "Ludwig Menke"}, {"name": "Gautier Beurnier", "title": "Head of Investments France", "company": "Black Swan Real Estate Capital", "responsible": "Adriana Lucchesi"}, {"name": "Sébastien Arnould", "title": "Head of Fund Management & Separate Account", "company": "Atland Voisin", "responsible": "Ludwig Menke"}, {"name": "Frédéric Auguste", "title": "Head of Asset Management", "company": "CBRE France", "responsible": "Ludwig Menke"}, {"name": "Alexandre Guignard", "title": "Head of Investment Management", "company": "Real I.S. AG - France", "responsible": "Ludwig Menke"}, {"name": "Christophe Murciani", "title": "Responsable Dette Immobilière - Direction Actifs Réels et Privés", "company": "LBP AM", "responsible": "Stepher Jules"}, {"name": "Alexandre Nedjar", "title": "Fund Manager", "company": "LBP AM", "responsible": "Stepher Jules"}, {"name": "Jean-Philippe Besse", "title": "Founding Partner", "company": "Parisian Real Estate Advisor", "responsible": "Adriana Lucchesi"}, {"name": "Saida Momtaz", "title": "Directrice Juridique", "company": "Momtaz Bridje", "responsible": "Ludwig Menke"}, {"name": "Jean Valette", "title": "Senior Investment Manager, France & CEE", "company": "Commerz Real France", "responsible": "Ludwig Menke"}, {"name": "Paul Chainiau", "title": "Director Investment & Asset Management", "company": "AG Real Estate - France", "responsible": "Ludwig Menke"}, {"name": "Gilles Chamignon", "title": "Head of Asset Management", "company": "AM ALPHA", "responsible": "Ludwig Menke"}, {"name": "Silvio Estienne", "title": "Cofondator and Managing Partner de Belvedere Capital & Alpha Logistics Real Estate", "company": "Belvedere Capital", "responsible": "Ludwig Menke"}, {"name": "Romain Fremont", "title": "CEO", "company": "FREO Group Holding - France", "responsible": "Ludwig Menke"}, {"name": "Marc-Philippe Hamamciyan", "title": "Head of Asset Management", "company": "Commerz Real AG - Germany", "responsible": "Ludwig Menke"}]}, "Deutsche GRI 2026": {"country": "Germany", "contacts": [{"name": "Ulf Klett", "title": "Head of Real Estate & Expansion", "company": "ALDI Immobilienverwaltung GmbH & Co. KG", "responsible": "Julien Geier"}, {"name": "Iris Hagdorn", "title": "Head Of Sustainability", "company": "HIH Invest Real Estate GmbH", "responsible": "Julien Geier"}, {"name": "Felix Frankl", "title": "Head of Real Estate", "company": "EZVK", "responsible": "Julien Geier"}, {"name": "Constantin Dornier", "title": "Founding Partner", "company": "Dornier Single Family Office", "responsible": "Julien Geier"}, {"name": "Isabelle Peter", "title": "Director of Data Center Real Estate Development", "company": "Schwarz Corporate Solutions", "responsible": "Julien Geier"}, {"name": "Hunter Kuhlwein", "title": "CTO", "company": "CRREM - Carbon Risk Real Estate Monitor", "responsible": "Julien Geier"}, {"name": "Jürgen Michels", "title": "Managing Director, Chief Economist", "company": "BayernLB - Germany", "responsible": "Julien Geier"}, {"name": "Caroline Korch", "title": "EMEA Permitting and Land Development", "company": "Microsoft", "responsible": "Julien Geier"}, {"name": "Robert Heinlein", "title": "Geschäftsführer", "company": "Versicherungskammer Real Estate GmbH", "responsible": "Julien Geier"}, {"name": "Moritz Siepmann", "title": "Head of M&A and Structured Transactions", "company": "Vonovia SE", "responsible": "Julien Geier"}]}, "Espana GRI 2026": {"country": "Spain", "contacts": [{"name": "Marta Cladera de Codina", "title": "Head of Real Estate, Iberia", "company": "Nuveen - Spain", "responsible": "Ludwig Menke"}, {"name": "Natalia Gómez Camino", "title": "Director of Strategy and Planning for Digital Infrastructures", "company": "Generalitat De Catalunya", "responsible": "Kayna Oliveira"}, {"name": "Diego Castro Alonso", "title": "Real Estate Funds Manager", "company": "Mapfre Inmuebles", "responsible": "Ludwig Menke"}]}, "Europe GRI 2026 - Summer Edition": {"country": "France", "contacts": [{"name": "George Fraser-Harding", "title": "Head of Pan-European Funds RE", "company": "Aviva Investors - France", "responsible": "Beatriz Zarattini"}]}, "Europe GRI 2026 - Winter Edition": {"country": "UK", "contacts": [{"name": "Achal Gandhi", "title": "CIO - Global Indirect Real Estate Strategies", "company": "CBRE Investment Management", "responsible": "Beatriz Zarattini"}, {"name": "Oksana Beard", "title": "Global Head Debt Capital Markets, Real Estate", "company": "Goldman Sachs", "responsible": "Beatriz Zarattini"}, {"name": "Claus Mathisen", "title": "CEO & Partner", "company": "Urban Partners", "responsible": "Beatriz Zarattini"}, {"name": "Abhishek Parmar", "title": "Head of Sustainable Development at HBREAVIS", "company": "HB Reavis - UK", "responsible": "**INACTIVE** Giovanna Paganini"}, {"name": "Hans Vrensen", "title": "European Head of Research and Strategy", "company": "AEW Europe - UK", "responsible": "**INACTIVE** Giovanna Paganini"}, {"name": "Brett Ormrod", "title": "Head of Sustainability", "company": "LaSalle Investment Management - UK", "responsible": "**INACTIVE** Giovanna Paganini"}, {"name": "Allen Chilten", "title": "Global Head of Real Estate Capital Formation", "company": "Schroders - UK", "responsible": "Beatriz Zarattini"}, {"name": "Julia Wein", "title": "COO", "company": "CRREM - Carbon Risk Real Estate Monitor", "responsible": "**INACTIVE** Giovanna Paganini"}, {"name": "Dennis Selinas", "title": "CEO", "company": "Currently Unaffiliated", "responsible": "Gabriel Ferraz"}, {"name": "Tudor Baidoc", "title": "Head of Global Strategic Properties (Northern Europe) - Global Realty", "company": "Amazon Global Realty", "responsible": "Ludwig Menke"}, {"name": "Duncan Parvin", "title": "Managing Director", "company": "Wells Fargo Bank - UK", "responsible": "Ludwig Menke"}]}, "Financement, Dette et Fiducie Immobilière en France": {"country": "France", "contacts": [{"name": "Laurine Jouvet", "title": "", "company": "Black Swan Real Estate Capital", "responsible": "Adriana Lucchesi"}, {"name": "Dalila Chabane", "title": "Senior Director", "company": "Deutsche Hypothekenbank  AG", "responsible": "**INACTIVE** Diana Paradela"}, {"name": "Anne - Isabelle Carbonnieres", "title": "Managing Director", "company": "Deutsche Hypothekenbank  AG", "responsible": "**INACTIVE** Diana Paradela"}, {"name": "Emmanuelle Pierret", "title": "Director", "company": "Naxicap Partners", "responsible": "Old_Raisa Brigo"}, {"name": "Alexandra Lepetit", "title": "Notaire associée", "company": "CHEUVREUX S.A.", "responsible": "Adriana Lucchesi"}, {"name": "Delphine Benchetrit", "title": "Managing Director", "company": "Eastdil Secured - France", "responsible": "Cintia Delesalle"}, {"name": "Arnaud Godard", "title": "Head of Capital Advisory", "company": "Colliers International - France", "responsible": "Cintia Delesalle"}, {"name": "Johann Champain", "title": "Head of Business Development Debt & Securitisation", "company": "IQ-EQ", "responsible": "Adriana Lucchesi"}, {"name": "Antoine Triffault Moreau", "title": "Head of Structuration - Fiducie Services", "company": "IQ-EQ", "responsible": "Adriana Lucchesi"}, {"name": "Slimane Hedir", "title": "Sales Director", "company": "IQ-EQ", "responsible": "Adriana Lucchesi"}, {"name": "Alexandre Brosseau", "title": "Head of Middle Office - Fiducie Services", "company": "IQ-EQ", "responsible": "Adriana Lucchesi"}, {"name": "Bertrand Gibeau", "title": "Head of Business Development", "company": "IQ-EQ", "responsible": "Adriana Lucchesi"}]}, "France GRI 2026": {"country": "France", "contacts": [{"name": "Grégoire Chauvière Le Drian", "title": "Head of EIB Group Office France", "company": "European Investment Bank - Luxembourg", "responsible": "**INACTIVE** Diana Paradela"}, {"name": "Jean-Côme D'almeida", "title": "", "company": "RX FRANCE", "responsible": "Beatriz Vollet"}, {"name": "Florence Toulot", "title": "Head Of Investment & Asset Management - Retail, Logistics And Living - Europe", "company": "Amundi Immobilier", "responsible": "Ludwig Menke"}]}, "GRI Chairmen’s Retreat Takeaways - Germany 2026": {"country": "Germany", "contacts": [{"name": "Bernd Knobloch", "title": "Chairman", "company": "Palatium", "responsible": "Victor Heimann"}, {"name": "Luisa Wolf", "title": "Founder & CEO", "company": "White Bird", "responsible": "Victor Heimann"}, {"name": "Emanuel Breitsameter", "title": "Co-CEO", "company": "Alasco GmbH", "responsible": "Victor Heimann"}, {"name": "Benedict Marzahn", "title": "Managing Director / CPO", "company": "Alasco GmbH", "responsible": "Victor Heimann"}, {"name": "Hanno Schrecker", "title": "MD / Country Head Germany", "company": "PAREF Investment Management Germany GmbH", "responsible": "Edmund Rosin"}, {"name": "Christian Daumann", "title": "Chief Executive Officer - Germany", "company": "QSix Deutschland GmbH", "responsible": "Edmund Rosin"}]}, "GRI Chairmen’s Retreat Takeaways - UK 2026": {"country": "UK", "contacts": [{"name": "Michael Kovacs", "title": "Founding Partner", "company": "Castleforge Partners", "responsible": "Natalia Morandi"}, {"name": "David Malpica", "title": "Managing Partner", "company": "Kewbridge Capital Limited", "responsible": "Natalia Morandi"}]}, "GRI Living Assets Europe 2026": {"country": "UK", "contacts": [{"name": "Kiran Raichura", "title": "Chief Commercial Real Estate Economist", "company": "Capital Economics - UK", "responsible": "**INACTIVE** Giovanna Paganini"}, {"name": "John German", "title": "Managing Director, Alternative Investments", "company": "Invesco - UK", "responsible": "Ludwig Menke"}, {"name": "Adam Burney", "title": "Head of Multifamily BTR & PBSA", "company": "Legal & General Investment Management", "responsible": "Ludwig Menke"}, {"name": "Nick Sanderson", "title": "Founder & CEO", "company": "Audley Group", "responsible": "Ludwig Menke"}, {"name": "Paul Oberschneider", "title": "Founder & CEO", "company": "Hilltop Credit Partners", "responsible": "Ludwig Menke"}]}, "GRI Living Assets Southern Europe 2026": {"country": "Spain", "contacts": [{"name": "Jaime Pérez Luque", "title": "European Commission's Housing Advisory Board", "company": "European Commission", "responsible": "**INACTIVE** Diana Paradela"}, {"name": "Pavlos Gennimatas", "title": "Senior Managing Director, Head of Living, Europe", "company": "Hines - UK", "responsible": "**INACTIVE** Giovanna Paganini"}, {"name": "Marcus Eilers", "title": "Head of European Residential", "company": "M&G Real Estate - Frankfurt", "responsible": "**INACTIVE** Giovanna Paganini"}, {"name": "Jason Baggaley", "title": "Head of Living, APAC Direct Real Estate, and Value Add Funds", "company": "Aberdeen Investments", "responsible": "**INACTIVE** Giovanna Paganini"}]}, "GRI Women Leading European RE 2026": {"country": "UK", "contacts": [{"name": "Jessica Hardman", "title": "CEO", "company": "Aboria Capital", "responsible": "**INACTIVE** Diana Paradela"}, {"name": "Catherine Webster", "title": "CEO", "company": "Thriving Investments", "responsible": "**INACTIVE** Diana Paradela"}, {"name": "Jenny Wang", "title": "COO & Head of Asset Management", "company": "Sunrise Real Estate", "responsible": "**INACTIVE** Diana Paradela"}, {"name": "Caroline Bernard", "title": "Global SVP Marketing & Communication Hotel Development", "company": "Accor Group", "responsible": "Mariana Pereira"}, {"name": "Jennifer Stillman", "title": "Head of Global Consultant Relations", "company": "Aberdeen Standard Investments - UK", "responsible": "Natalia Morandi"}, {"name": "Kitty Vaughan", "title": "", "company": "Pradera - London", "responsible": "Mariana Pereira"}, {"name": "Ieva Banyte", "title": "", "company": "IQ-EQ", "responsible": "Cintia Delesalle"}, {"name": "Swati Srivastava", "title": "BNPP REIM Country Head UK & Head of Institutional Sales & Investor Relations - UK, Ireland, Netherlands, Nordics & International", "company": "BNP Paribas - UK", "responsible": "Laura Iurcic"}, {"name": "Niki Chona", "title": "Head of back leverage EMEA and APAC", "company": "JP Morgan Chase Bank", "responsible": "Laura Iurcic"}, {"name": "Grace Grancaric", "title": "", "company": "Spencer House Partners", "responsible": "Beatriz Zarattini"}, {"name": "Nicola Crowley", "title": "", "company": "Aroundtown SA", "responsible": "Victor Heimann"}, {"name": "Lucy Greenwood", "title": "", "company": "Spencer House Partners", "responsible": "Beatriz Zarattini"}, {"name": "Jasmin Boeckmann", "title": "Senior Director (Business Development and Capital Raising)", "company": "Greystar - UK", "responsible": "Loredana Carollo"}]}, "Germany’s C-Circle Gathering": {"country": "Germany", "contacts": [{"name": "Jürgen Michels", "title": "Managing Director, Chief Economist", "company": "BayernLB - Germany", "responsible": "Julien Geier"}, {"name": "Curth C. Flatow", "title": "Managing Partner / Founder", "company": "FAP Group GmbH", "responsible": "Victor Heimann"}, {"name": "Stefan Klingsöhr", "title": "Managing Partner", "company": "Klingsöhr Projektentwicklung GmbH", "responsible": "Victor Heimann"}, {"name": "Robert Heinlein", "title": "Geschäftsführer", "company": "Versicherungskammer Real Estate GmbH", "responsible": "Julien Geier"}, {"name": "Cornelia Thaler", "title": "", "company": "Willkie Farr & Gallagher LLP - Germany", "responsible": "Edmund Rosin"}]}, "Ibero GRI 2026": {"country": "Portugal", "contacts": [{"name": "Andrew Kenningham", "title": "Chief Europe Economist", "company": "Capital Economics - UK", "responsible": "**INACTIVE** Giovanna Paganini"}, {"name": "Luís Mota Duarte", "title": "Deputy CEO & Head of Investment Management", "company": "Sierra Portugal", "responsible": "**INACTIVE** Giovanna Paganini"}]}, "Italia GRI 2026": {"country": "Italy", "contacts": [{"name": "Adolfo Favieres", "title": "Head of Southern Europe", "company": "BlackRock - Spain", "responsible": "**INACTIVE** Giovanna Paganini"}]}, "Italy BTR & PBSA 2026": {"country": "Italy", "contacts": [{"name": "Pier Matteo Carrescia", "title": "Senior Associate", "company": "H.I.G. Capital - UK", "responsible": "Laura Sancesario"}, {"name": "Michele Pusterla", "title": "Country Head & Development Director - Italy", "company": "BaseStack Living - Italy", "responsible": "Keivan Salimi"}]}, "Italy Luxury Hotels & Branded Resi": {"country": "Italy", "contacts": [{"name": "Marcello Cerea", "title": "CEO", "company": "Starching S.p.A.", "responsible": "**INACTIVE** Giovanna Paganini"}, {"name": "Angelica Corsini", "title": "Director Head of Business Development", "company": "Arsenale Group", "responsible": "Caterina Locatelli"}, {"name": "Martina Martino", "title": "Head of Advisory Europe", "company": "Belmond Italy", "responsible": "Caterina Locatelli"}, {"name": "Tanya Byls", "title": "Head of Real Estate & Hospitality, EMEA and South America", "company": "Tonino Lamborghini Spa", "responsible": "Keivan Salimi"}, {"name": "Alessandro di Paola", "title": "Hotel Development Assistant Manager", "company": "Lungarno Collection", "responsible": "Keivan Salimi"}, {"name": "Claudio Volo", "title": "Director", "company": "Ornare Móveis", "responsible": "Pietra Sabrina"}, {"name": "Angela Amoruso", "title": "Business Development Manager", "company": "BIG - Bjarke Ingels Group", "responsible": "Laura Sancesario"}]}, "Jazz & Dinner Experience - Winter Edition": {"country": "UK", "contacts": [{"name": "Richard Steer", "title": "Chairman", "company": "Gleeds - London", "responsible": "Ludwig Menke"}, {"name": "Hayley Cameron", "title": "Global Head of Business Development", "company": "Gleeds - LLP", "responsible": "Ludwig Menke"}, {"name": "Brian McArdle", "title": "MD, UK", "company": "Gleeds - LLP", "responsible": "Ludwig Menke"}, {"name": "Michael Toft", "title": "Co-Head of Real Estate Investment - Head of Care Homes, Senior Fund Manager", "company": "Octopus Capital", "responsible": "Ludwig Menke"}]}, "Pan-European CRE Logistics & Data Centres Investment Deals": {"country": "UK", "contacts": [{"name": "Jeremy Bishop", "title": "Founder", "company": "Arkus Real Estate", "responsible": "Natalia Morandi"}, {"name": "Kevin Muscat", "title": "Head of Transactions", "company": "Evonite", "responsible": "Natalia Morandi"}, {"name": "Eoin Conway", "title": "Managing Director", "company": "ESTAma .", "responsible": "Giulia Lenharo"}, {"name": "Tom Dalton", "title": "Partner", "company": "Dentons - UK", "responsible": "Laura Iurcic"}, {"name": "Thor Johnsen", "title": "Managing Partner", "company": "Digital Gravity Infrastructure Partners", "responsible": "Ludwig Menke"}, {"name": "Haroon Akram", "title": "", "company": "Harworth Group", "responsible": "Giulia Lenharo"}, {"name": "Jonathan Maxwell", "title": "Group CEO and Founder", "company": "Sustainable Development Capital LLP", "responsible": "Giulia Lenharo"}, {"name": "Harry Blaxland Ferre", "title": "Vice President", "company": "Brookfield - UK", "responsible": "Ludwig Menke"}, {"name": "Pierre Le Normand", "title": "Director", "company": "Pithos Capital", "responsible": "Giulia Lenharo"}, {"name": "Andy Jansons", "title": "Managing Director", "company": "Jansons Property", "responsible": "Natalia Morandi"}, {"name": "Tom Kinsley", "title": "Senior Director, European Logistics Investment", "company": "CBRE - UK", "responsible": "Natalia Morandi"}, {"name": "Henry Kerr", "title": "Senior Business Development Manager | Funds & Institutions", "company": "Convera", "responsible": "Raisa Brigo"}]}, "Pan-European Equity & Debt Strategies": {"country": "UK", "contacts": [{"name": "Lydia Boos", "title": "Head of Legal", "company": "Cheyne Capital", "responsible": "Natalia Morandi"}, {"name": "Stewart McAndie", "title": "", "company": "Ashmore Investment Management Limited", "responsible": "Giulia Lenharo"}, {"name": "Anita Roberts-Engel", "title": "Associate General Counsel", "company": "Aimco", "responsible": "Laura Iurcic"}, {"name": "Diego Sanfilippo", "title": "Managing Director and Head of Real Estate and Hospitality Finance Italy", "company": "Natixis - Italy", "responsible": "Caterina Locatelli"}, {"name": "Ralph Lünenschloss", "title": "", "company": "Votera GmbH", "responsible": "Edmund Rosin"}, {"name": "Tom Rowley", "title": "Partner, Co-Portfolio Manager, Europe Real Estate", "company": "Angelo Gordon & Co - Europe", "responsible": "Ludwig Menke"}, {"name": "James Conolly", "title": "", "company": "Grosvenor Fund Management - London", "responsible": "Giulia Lenharo"}]}, "Portugal GRI 2026": {"country": "Portugal", "contacts": [{"name": "Sylvie Vanhoenackere", "title": "Head of Real Estate", "company": "Grupo Ageas - Portugal", "responsible": "**INACTIVE** Giovanna Paganini"}]}, "Portuguese Affordability & PBSA Investments": {"country": "Portugal", "contacts": [{"name": "Margarida Anselmo", "title": "CEO @Casais Capital | Grupo Casais", "company": "Grupo Casais", "responsible": "Jaqueline Araujo"}, {"name": "David de Sousa Paisana", "title": "Managing Partner", "company": "GRIS - Real Estate Investment", "responsible": "Jaqueline Araujo"}, {"name": "Tomás Assis Teixeira", "title": "Partner", "company": "CCA LAW FIRM", "responsible": "**INACTIVE** Giovanna Paganini"}, {"name": "Vítor Oliveira", "title": "Head of Investment Management", "company": "Stoneshield Capital - Portugal", "responsible": "Jaqueline Araujo"}, {"name": "André Ferreira Lopes", "title": "Operations Manager Portugal", "company": "Xior Student Housing", "responsible": "Jaqueline Araujo"}, {"name": "Houssam Dehhaze", "title": "Managing Director", "company": "SouthShore Investment", "responsible": "Jaqueline Araujo"}, {"name": "Pedro Fernandes Antunes", "title": "Founding Partner", "company": "Alea Capital Partners", "responsible": "Jaqueline Araujo"}, {"name": "José Rui Meneses e Castro", "title": "Co-CEO & Founder", "company": "MAP Group", "responsible": "Julia Bearzotti"}, {"name": "Miguel Rodrigues", "title": "CEO", "company": "FLH - Feelslikehome", "responsible": "Julia Bearzotti"}, {"name": "Diogo Abecasis", "title": "Co-CEO & Founder", "company": "MAP Group", "responsible": "Julia Bearzotti"}, {"name": "Manuel Pinto de Abreu", "title": "Head of Real Estate", "company": "STAG Fund Management", "responsible": "Julia Bearzotti"}]}, "Résidentiel Géré et Hôtels France 2026": {"country": "France", "contacts": [{"name": "Inès Ramdane", "title": "Development Director - France & Benelux", "company": "Wyndham Hotels & Resorts France", "responsible": "Old_Raisa Brigo"}, {"name": "Marc-Olivier Assouline", "title": "Head of Value Add Europe", "company": "Columbia Threadneedle Real Estate Partners", "responsible": "Adriana Lucchesi"}, {"name": "Romain Lephilibert", "title": "", "company": "Bouygues Construction - France", "responsible": "Adriana Lucchesi"}, {"name": "Antoine Louis-Tramoni", "title": "", "company": "Marriott International - Paris", "responsible": "Old_Raisa Brigo"}, {"name": "Alexis Egger", "title": "Hospitality Investment -Asset Manager", "company": "Amundi Immobilier", "responsible": "Adriana Lucchesi"}, {"name": "Gwenola Donet", "title": "Investor Services Europe du Sud | Value & Risk Advisory", "company": "JLL - France", "responsible": "Adriana Lucchesi"}, {"name": "Frédéric Leclerc", "title": "Directeur Capital Immobilier", "company": "Audacia", "responsible": "Adriana Lucchesi"}]}, "Site Visits Europe GRI 2026 - Winter Edition": {"country": "UK", "contacts": [{"name": "Tomasz Jurkanis", "title": "Company Owner", "company": "Loft Asset Management", "responsible": "Natalia Morandi"}]}, "Site Visits GRI Living Southern Europe 2026": {"country": "Spain", "contacts": [{"name": "Bernardo Empis Meira", "title": "CEO", "company": "BlueCrow Capital", "responsible": "Jaqueline Araujo"}]}, "Site Visits Italia GRI 2026": {"country": "Italy", "contacts": [{"name": "Diletta Giorgolo Spinola", "title": "Head of Residential and CEO", "company": "Italy Sotheby's International Realty", "responsible": "Keivan Salimi"}, {"name": "Vincenzo Noviello", "title": "CEO", "company": "Nazca", "responsible": "Keivan Salimi"}, {"name": "Salvatore Occini", "title": "Italy Director", "company": "Eurocommercial Properties - Italy", "responsible": "Caterina Locatelli"}, {"name": "Giacomo Silvestri", "title": "General Manager", "company": "Foruminvest Italia S.r.l.", "responsible": "Caterina Locatelli"}]}, "Spain Economics & RE Investments": {"country": "Spain", "contacts": [{"name": "Julián Salcedo Gómez", "title": "President - Forum of Real Estate Economists", "company": "Colegio de Economistas de Madrid - CEMAD", "responsible": "**INACTIVE** Diana Paradela"}, {"name": "Ignacio Matilla Ibarra", "title": "Investment Associate", "company": "Athol Asset", "responsible": "Julia Bearzotti"}, {"name": "Andrea Atilano", "title": "Investment Associate", "company": "Castlelake", "responsible": "Tomas Terracini"}, {"name": "Adolfo Favieres", "title": "Head of Southern Europe", "company": "BlackRock - Spain", "responsible": "Caterina Locatelli"}, {"name": "Pablo Álvarez-Rendueles", "title": "Head of Origination Spain and Portugal, Real Estate Coverage", "company": "ING Wholesale Banking  - Spain", "responsible": "Old_Raisa Brigo"}, {"name": "Pablo Calvillo", "title": "Head of Iberia & France - Credit Strategies", "company": "ESR - Spain", "responsible": "Old_Raisa Brigo"}, {"name": "Fernando de Galainena", "title": "Head of Real Estate Structured Finance - Iberia", "company": "Societe Generale - España", "responsible": "Caterina Locatelli"}, {"name": "Cesáreo Guerra Galí", "title": "", "company": "Asociación Vivienda Joven", "responsible": "**INACTIVE** Diana Paradela"}]}, "Spanish Value-Add & Mixed-Use Investments": {"country": "Spain", "contacts": [{"name": "Carmen Panadero Reyes", "title": "Managing Director", "company": "Impar Asset Capital Management", "responsible": "Old_Raisa Brigo"}, {"name": "Javier Cámara Gazapo", "title": "Director Hospitality, PBSA & Healthcare", "company": "Grupo Lar - Spain", "responsible": "Julia Bearzotti"}, {"name": "Juan Jose Fernández Caviedes", "title": "Founder", "company": "Noviris Capital", "responsible": "Old_Raisa Brigo"}, {"name": "Enrique Santos", "title": "VP", "company": "Incus Capital", "responsible": "Caterina Locatelli"}]}, "The Beds Ecosystem in Germany - Hospitality Meets Residential": {"country": "Germany", "contacts": [{"name": "Ascan Kókai", "title": "Principal – Head of Hotels", "company": "ECE Real Estate Partners G.m.b.H.", "responsible": "Victor Heimann"}, {"name": "David Alexander", "title": "Vice President", "company": "Activum SG Capital Management", "responsible": "Edmund Rosin"}, {"name": "Simon Behr", "title": "Managing Partner", "company": "Livory Group", "responsible": "Edmund Rosin"}, {"name": "Anastasia Osipov", "title": "Director Development Germany", "company": "Motel One Gmbh", "responsible": "Julien Geier"}, {"name": "Josef Filser", "title": "Head of Hospitality Germany", "company": "Genesis Hospitality Partners", "responsible": "Edmund Rosin"}, {"name": "Gesa Rohwedder", "title": "Associated Partner and Head of Hospitality Europe", "company": "Drees & Sommer.", "responsible": "Victor Heimann"}, {"name": "Marlene Auerbacher", "title": "Senior Investment Manager", "company": "Periskop Development GmbH", "responsible": "Victor Heimann"}, {"name": "Matthias Maas", "title": "Vice President Expansion DACH+ & BeNeLux", "company": "Limehome GmbH", "responsible": "Victor Heimann"}, {"name": "Philipp Bettmer", "title": "", "company": "Numa Group", "responsible": "Victor Heimann"}, {"name": "Magnus Busch", "title": "Co-Founder & CEO", "company": "Nook Society", "responsible": "Victor Heimann"}, {"name": "Johannes Bescher", "title": "Counsel | Lawyer", "company": "CMS Hasche Sigle - Berlin", "responsible": "Julien Geier"}, {"name": "Andreas Otto", "title": "Partner, Global Co-Head of Real Estate", "company": "CMS Hasche Sigle - Berlin", "responsible": "Julien Geier"}, {"name": "Fabian Godbersen", "title": "Managing Director", "company": "Bergson Real Estate Capital GmbH", "responsible": "Edmund Rosin"}, {"name": "Carlotta Gehling", "title": "Asset & Fund Director", "company": "Magna Asset Management AG", "responsible": "Victor Heimann"}, {"name": "Benjamin Albrecht", "title": "Head Of Space Conversion", "company": "Aroundtown SA", "responsible": "Victor Heimann"}, {"name": "Sebastian Koch", "title": "Head of Hotels & Hospitality Management Germany", "company": "Covivio Immobilien GmbH", "responsible": "Victor Heimann"}, {"name": "Caspar Kraushaar", "title": "Project Director Hotel", "company": "ParkProperty Europe", "responsible": "Victor Heimann"}, {"name": "Robin von Bothmer", "title": "", "company": "ParkProperty Europe", "responsible": "Victor Heimann"}, {"name": "Felix Lorenz", "title": "", "company": "Centralis Immobilien Gruppe", "responsible": "Victor Heimann"}, {"name": "Tobi Weissinger", "title": "", "company": "Caleus Investment Management GmbH", "responsible": "Edmund Rosin"}, {"name": "Veronica Eckhoff", "title": "Vice President", "company": "Aareal Bank AG", "responsible": "Victor Heimann"}, {"name": "Maren Heide", "title": "", "company": "Hedera-Gruppe", "responsible": "Victor Heimann"}]}, "UK Living Transactions": {"country": "UK", "contacts": [{"name": "Antonio Marin-Bataller", "title": "Head of Investment Management Living", "company": "Patrizia Immobilien AG - UK", "responsible": "Natalia Morandi"}, {"name": "George Dyer", "title": "Group Investment Director", "company": "Watkin Jones Group - London", "responsible": "Ludwig Menke"}, {"name": "Madeleine Rogers", "title": "Fund Manager", "company": "Legal & General Investment Management", "responsible": "Ludwig Menke"}, {"name": "Jamie Smith", "title": "Development Director, Head of Residential Development", "company": "Related Argent", "responsible": "Ludwig Menke"}, {"name": "Jasper Gilbey", "title": "Head of Housing and Alternatives, Europe", "company": "Nuveen Real Estate - UK", "responsible": "Ludwig Menke"}, {"name": "Val O'Donoghue", "title": "Real Estate Private Equity - Recapitalization, Secondaries, Co-Investment & Fund Investments", "company": "StepStone Group", "responsible": "Loredana Carollo"}, {"name": "Shankar Manoharan", "title": "Head of Investment", "company": "Impact Global", "responsible": "Natalia Morandi"}, {"name": "Amir Esmaeili", "title": "Associate Director | Acquisitions and Investment", "company": "Grainger Plc - London", "responsible": "Natalia Morandi"}]}, "Urbanisme, stratégies fiscales et nouveaux usages immobiliers": {"country": "France", "contacts": [{"name": "Julien Pierrepont", "title": "Chief of Business & Marketing France", "company": "AYMING", "responsible": "Adriana Lucchesi"}, {"name": "Valérie Fila", "title": "Real Estate Sales Manager", "company": "AYMING", "responsible": "Adriana Lucchesi"}, {"name": "Xavier Porée", "title": "Fiscaliste", "company": "AYMING", "responsible": "Adriana Lucchesi"}, {"name": "Stéphane Gastineau", "title": "Manager Fiscalité Locale", "company": "AYMING", "responsible": "Adriana Lucchesi"}, {"name": "Nicolas Tamarelle", "title": "Directeur du développement France", "company": "Montea - France", "responsible": "Ludwig Menke"}]}, "Women Leading CEE Real Estate 2026": {"country": "Poland", "contacts": [{"name": "Justyna Tinc", "title": "Head of Asset Management", "company": "REINO Partners - Poland", "responsible": "Juliana Pires"}, {"name": "Agnieszka Ciupak", "title": "Managing Director Poland", "company": "GTC S.A.", "responsible": "Vitor Rocha"}, {"name": "Sylwia Pyskiewicz", "title": "CEO", "company": "Equinix - Poland", "responsible": "Beatriz Zarattini"}, {"name": "Magdalena Uler-Kłeczek", "title": "CIO", "company": "7R - Europe", "responsible": "Juliana Pires"}, {"name": "Joanna Sinkiewicz", "title": "Group Commercial Director", "company": "Accolade Group", "responsible": "Juliana Pires"}, {"name": "Ewa Podgórska", "title": "Chief Legal Counsel & Senior Partner Chief Compliance Officer", "company": "Griffin Capital Partners", "responsible": "Julien Geier"}]}, "Women Leading European Real Estate - London Summer Edition 2026": {"country": "UK", "contacts": [{"name": "Dr. Ayesha Khanna", "title": "Founder", "company": "Amplify", "responsible": "Beatriz Zarattini"}, {"name": "Amy Low", "title": "CEO", "company": "AbilityNet", "responsible": "Beatriz Zarattini"}]}, "Women Leading German Real Estate 2026": {"country": "Germany", "contacts": [{"name": "Isabelle Peter", "title": "Director of Data Center Real Estate Development", "company": "Schwarz Corporate Solutions", "responsible": "Julien Geier"}, {"name": "Claudia Lewin", "title": "", "company": "Vastint - Germany", "responsible": "Victor Heimann"}, {"name": "Cynthia Pierre", "title": "Vice President", "company": "Urban Capital Partners Gmbh", "responsible": "Victor Heimann"}, {"name": "Anna Ginkel", "title": "MD of Loan Markets & Syndication", "company": "Aareal Bank AG", "responsible": "Victor Heimann"}, {"name": "Mihaela Ruhl", "title": "", "company": "abrdn Investments Deutschland AG.", "responsible": "Victor Heimann"}, {"name": "Meltem Cömertbay", "title": "Head of Acquisition", "company": "GROPYUS", "responsible": "Victor Heimann"}, {"name": "Sabine Wieduwilt", "title": "Partner", "company": "Dentons - Germany", "responsible": "Victor Heimann"}, {"name": "Caroline Korch", "title": "EMEA Permitting and Land Development", "company": "Microsoft", "responsible": "Julien Geier"}, {"name": "Cornelia Thaler", "title": "", "company": "Willkie Farr & Gallagher LLP - Germany", "responsible": "Edmund Rosin"}]}, "Women Leading Portuguese Real Estate 2026": {"country": "Portugal", "contacts": [{"name": "Keti Angelova", "title": "", "company": "Private Luxury Collection", "responsible": "Jaqueline Araujo"}, {"name": "Keely Capel", "title": "Founder & Managing Director", "company": "Private Luxury Collection", "responsible": "Jaqueline Araujo"}]}};
 
-const CONV = {
-  "C-Circle Experience - London Summer Edition - Hosted by Accor": {"converted_count": 0, "converted_amount": 0},
-  "C-Circle Reunion 2026 - Winter Edition": {"converted_count": 0, "converted_amount": 0},
-  "CEE & Polish Real Estate Forum 2026 - London Edition": {"converted_count": 3, "converted_amount": 14545.0},
-  "CEE Capital Flows - Foreign & Domestic RE Investments": {"converted_count": 0, "converted_amount": 0},
-  "CEE Commercial Real Estate Forum": {"converted_count": 1, "converted_amount": 9600.0},
-  "CEE GRI 2026": {"converted_count": 0, "converted_amount": 0},
-  "CEE Living Assets": {"converted_count": 1, "converted_amount": 12000.0},
-  "Coup d'envoi du Marché Immobilier 2026": {"converted_count": 1, "converted_amount": 2300.0},
-  "Deutsche GRI 2026": {"converted_count": 0, "converted_amount": 0},
-  "Espana GRI 2026": {"converted_count": 0, "converted_amount": 0},
-  "Europe GRI 2026 - Summer Edition": {"converted_count": 0, "converted_amount": 0},
-  "Europe GRI 2026 - Winter Edition": {"converted_count": 0, "converted_amount": 0},
-  "Financement, Dette et Fiducie Immobilière en France": {"converted_count": 0, "converted_amount": 0},
-  "France GRI 2026": {"converted_count": 0, "converted_amount": 0},
-  "GRI Chairmen's Retreat Takeaways - Germany 2026": {"converted_count": 1, "converted_amount": 2695.0},
-  "GRI Chairmen's Retreat Takeaways - UK 2026": {"converted_count": 1, "converted_amount": 5000.0},
-  "GRI Living Assets Europe 2026": {"converted_count": 0, "converted_amount": 0},
-  "GRI Living Assets Southern Europe 2026": {"converted_count": 0, "converted_amount": 0},
-  "GRI Women Leading European RE 2026": {"converted_count": 3, "converted_amount": 29930.0},
-  "Germany's C-Circle Gathering": {"converted_count": 0, "converted_amount": 0},
-  "Ibero GRI 2026": {"converted_count": 0, "converted_amount": 0},
-  "Italia GRI 2026": {"converted_count": 0, "converted_amount": 0},
-  "Italy BTR & PBSA 2026": {"converted_count": 0, "converted_amount": 0},
-  "Italy Luxury Hotels & Branded Resi": {"converted_count": 0, "converted_amount": 0},
-  "Jazz & Dinner Experience - Winter Edition": {"converted_count": 0, "converted_amount": 0},
-  "Pan-European CRE Logistics & Data Centres Investment Deals": {"converted_count": 0, "converted_amount": 0},
-  "Pan-European Equity & Debt Strategies": {"converted_count": 0, "converted_amount": 0},
-  "Portugal GRI 2026": {"converted_count": 0, "converted_amount": 0},
-  "Portuguese Affordability & PBSA Investments": {"converted_count": 0, "converted_amount": 0},
-  "Résidentiel Géré et Hôtels France 2026": {"converted_count": 0, "converted_amount": 0},
-  "Site Visits Europe GRI 2026 - Winter Edition": {"converted_count": 1, "converted_amount": 20580.0},
-  "Site Visits GRI Living Southern Europe 2026": {"converted_count": 0, "converted_amount": 0},
-  "Site Visits Italia GRI 2026": {"converted_count": 0, "converted_amount": 0},
-  "Spain Economics & RE Investments": {"converted_count": 1, "converted_amount": 5000.0},
-  "Spanish Value-Add & Mixed-Use Investments": {"converted_count": 1, "converted_amount": 7000.0},
-  "The Beds Ecosystem in Germany - Hospitality Meets Residential": {"converted_count": 2, "converted_amount": 10495.0},
-  "UK Living Transactions": {"converted_count": 0, "converted_amount": 0},
-  "Urbanisme, stratégies fiscales et nouveaux usages immobiliers": {"converted_count": 0, "converted_amount": 0},
-  "Women Leading CEE Real Estate 2026": {"converted_count": 0, "converted_amount": 0},
-  "Women Leading European Real Estate - London Summer Edition 2026": {"converted_count": 0, "converted_amount": 0},
-  "Women Leading German Real Estate 2026": {"converted_count": 0, "converted_amount": 0},
-  "Women Leading Portuguese Real Estate 2026": {"converted_count": 0, "converted_amount": 0}
-};
+let currentSort='country', chartsBuilt=false;
+let salesCI, membersCI, convCI;
 
-
-const CONV_NAMES = {"CEE & Polish Real Estate Forum 2026 - London Edition":["Maciej Tuszy\u017Eński","Sa\u0161a Perko","Simon Johnson"],"CEE Commercial Real Estate Forum":["Piotr Gozdziewicz"],"CEE Living Assets":["Jan Bedn\u00e1\u0159"],"Coup d'envoi du March\u00e9 Immobilier 2026":["Cyrille Miallou"],"GRI Chairmen's Retreat Takeaways - Germany 2026":["Maximilian Sauermann"],"GRI Chairmen's Retreat Takeaways - UK 2026":["Crispin Gandy"],"GRI Women Leading European RE 2026":["Joana Mestre","Lucia Lassaletta","Magda Pokorn\u00e1"],"Site Visits Europe GRI 2026 - Winter Edition":["Joana Mestre"],"Spain Economics & RE Investments":["Felipe Perez"],"Spanish Value-Add & Mixed-Use Investments":["Robin Decaux"],"The Beds Ecosystem in Germany - Hospitality Meets Residential":["Alexander M\u00fcller","Tobias Gollnest"]};
-
-// Close popups when clicking outside
-document.addEventListener('click', function(e) {
-  if (!e.target.closest('.conv-wrap')) {
-    document.querySelectorAll('.conv-popup').forEach(p => p.classList.remove('open'));
-  }
-});
-
-function toggleConvPopup(btn) {
-  const popup = btn.nextElementSibling;
-  const isOpen = popup.classList.contains('open');
-  document.querySelectorAll('.conv-popup').forEach(p => p.classList.remove('open'));
-  if (!isOpen) popup.classList.add('open');
-}
-
-function fmt(n){return(!n||n===0)?'<span style="color:#ccc">—</span>':'€'+Math.round(n).toLocaleString('de-DE');}
-function fmtN(n){return n>0?n:'<span style="color:#ccc">—</span>';}
-function badge(t){const m={'Club Event':'b-club','Open Event':'b-open','eMeeting':'b-meet','Experience':'b-exp',"Chairmen's Retreat":'b-ret'};return`<span class="badge ${m[t]||'b-club'}">${t||''}</span>`;}
-function parseDate(s){if(!s)return new Date(9999,0,1);const c=s.replace(/.*?(\d{1,2})\s(\w+)\s(\d{4}).*/,'$1 $2 $3');const d=new Date(c);return isNaN(d)?new Date(9999,0,1):d;}
-function sn(n,max=30){return n.length>max?n.slice(0,max)+'…':n;}
-
-const countries=[...new Set(DATA.map(d=>d.Country).sort())];
-const types=[...new Set(DATA.map(d=>d['Event Type']).sort())];
+// Filters
+const countries=[...new Set(DATA.map(d=>d.Country).filter(Boolean).sort())];
+const types=[...new Set(DATA.map(d=>d['Event Type']).filter(Boolean).sort())];
 const fC=document.getElementById('fCountry'), fT=document.getElementById('fType');
 countries.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;fC.appendChild(o);});
 types.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;fT.appendChild(o);});
 
-let currentSort='country', chartsBuilt=false;
+// NC filters
+const ncCountries=[...new Set(Object.values(NOT_CONV).map(v=>v.country).filter(Boolean).sort())];
+const ncResps=[...new Set(Object.values(NOT_CONV).flatMap(v=>v.contacts.map(c=>c.responsible)).filter(Boolean).sort())];
+const ncC=document.getElementById('ncCountry'), ncR=document.getElementById('ncResp');
+ncCountries.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;ncC.appendChild(o);});
+ncResps.forEach(r=>{const o=document.createElement('option');o.value=r;o.textContent=r;ncR.appendChild(o);});
 
 function switchTab(tab){
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['table','charts'][i]===tab));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['table','charts','media','notconv'][i]===tab));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.add('active');
   if(tab==='charts'&&!chartsBuilt){buildCharts();chartsBuilt=true;}
+  if(tab==='notconv')renderNC();
 }
 
 function setSort(s){
@@ -269,35 +275,48 @@ function setSort(s){
   render();
 }
 
-function sortRows(rows){
-  if(currentSort==='date')return[...rows].sort((a,b)=>parseDate(a['Event Date'])-parseDate(b['Event Date']));
-  if(currentSort==='sales')return[...rows].sort((a,b)=>b['Total Amount']-a['Total Amount']);
-  if(currentSort==='type')return[...rows].sort((a,b)=>(a['Event Type']||'').localeCompare(b['Event Type']||'')||a['Event Name'].localeCompare(b['Event Name']));
-  const countryOrder = c => c === 'Czech Republic' ? 'Polandzz' : c;
-  return[...rows].sort((a,b)=>countryOrder(a.Country).localeCompare(countryOrder(b.Country))||a['Event Name'].localeCompare(b['Event Name']));
+function pd(s){
+  if(!s)return new Date(9999,0,1);
+  const m=s.match(/(\d{1,2})\s+(\w+)\s+(\d{4})/);
+  if(m){const d=new Date(`${m[2]} ${m[1]} ${m[3]}`);return isNaN(d)?new Date(9999,0,1):d;}
+  return new Date(9999,0,1);
 }
 
+function sortRows(rows){
+  const co=c=>c==='Czech Republic'?'Polandzz':c;
+  if(currentSort==='date')return[...rows].sort((a,b)=>pd(a['Event Date'])-pd(b['Event Date']));
+  if(currentSort==='sales')return[...rows].sort((a,b)=>b['Total Amount']-a['Total Amount']);
+  if(currentSort==='type')return[...rows].sort((a,b)=>(a['Event Type']||'').localeCompare(b['Event Type']||'')||a['Event Name'].localeCompare(b['Event Name']));
+  return[...rows].sort((a,b)=>co(a.Country||'').localeCompare(co(b.Country||''))||pd(a['Event Date'])-pd(b['Event Date']));
+}
+
+function fmt(n){return(!n||n===0)?'<span style="color:#ccc">—</span>':'€'+Math.round(n).toLocaleString('de-DE');}
+function fmtN(n){return n>0?n:'<span style="color:#ccc">—</span>';}
+function badge(t){const m={'Club Event':'b-club','Open Event':'b-open','eMeeting':'b-meet','Experience':'b-exp',"Chairmen's Retreat":'b-ret'};return`<span class="badge ${m[t]||'b-club'}">${t||''}</span>`;}
+function sn(n,max=30){return n&&n.length>max?n.slice(0,max)+'…':n||'';}
+
+document.addEventListener('click',e=>{if(!e.target.closest('.conv-wrap'))document.querySelectorAll('.conv-popup').forEach(p=>p.classList.remove('open'));});
+function toggleConvPopup(btn){const p=btn.nextElementSibling;const o=p.classList.contains('open');document.querySelectorAll('.conv-popup').forEach(x=>x.classList.remove('open'));if(!o)p.classList.add('open');}
+
 function rowHtml(d){
+  const c=d['Converted Count']||0, a=d['Converted Amount']||0;
+  const names=(CONV_NAMES[d['Event Name']]||[]);
+  const convCell=c>0?`<div class="conv-wrap"><button class="conv-btn" onclick="toggleConvPopup(this)">${c}</button><div class="conv-popup"><div class="conv-popup-title">Guests convertidos</div><ul>${names.map(n=>`<li>${n}</li>`).join('')}</ul></div></div>`:'<span style="color:#ccc">—</span>';
+  const st=d['Sub Type']&&d['Sub Type']!=='0'?d['Sub Type']:'—';
   return`<tr>
     <td class="event-name" title="${d['Event Name']}">${d['Event Name']}</td>
     <td>${badge(d['Event Type'])}</td>
-    <td class="city" style="font-size:12px;color:#555">${d['Sub Type']?d['Sub Type']:'—'}</td>
+    <td class="city" style="font-size:12px;color:#555">${st}</td>
     <td class="city">${d.City||'—'}</td>
-    <td class="date">${d['Event Date']}</td>
+    <td class="city" style="white-space:nowrap">${d['Event Date']}</td>
     <td class="num">${fmtN(d.Member)}</td>
     <td class="num">${fmtN(d.Guest)}</td>
     <td class="num">${fmtN(d['Co-chair'])}</td>
     <td class="num">${fmtN(d.Delegate)}</td>
     <td class="num ${d['Total Amount']>0?'t-blue':''}">${fmt(d['Total Amount'])}</td>
     <td class="num ${d['SPEX Amount']>0?'t-green':''}">${fmt(d['SPEX Amount'])}</td>
-    <td class="num">${(()=>{
-      const c=(CONV[d['Event Name']]||{}).converted_count;
-      if(!c) return '<span style="color:#ccc">—</span>';
-      const names=(CONV_NAMES[d['Event Name']]||[]);
-      const items=names.map(n=>'<li>'+n+'</li>').join('');
-      return '<div class="conv-wrap"><button class="conv-btn" onclick="toggleConvPopup(this)">'+c+'</button><div class="conv-popup"><div class="conv-popup-title">Guests convertidos</div><ul>'+items+'</ul></div></div>';
-    })()}</td>
-    <td class="num">${(()=>{const a=(CONV[d['Event Name']]||{}).converted_amount;return a>0?'<span style="color:#7C3AED;font-weight:600">\u20AC'+Math.round(a).toLocaleString("de-DE")+'</span>':'<span style="color:#ccc">—</span>';})()}</td>
+    <td class="num">${convCell}</td>
+    <td class="num ${a>0?'t-purple':''}">${fmt(a)}</td>
   </tr>`;
 }
 
@@ -314,20 +333,20 @@ function render(){
   const sorted=sortRows(rows);
   let html='';
   if(currentSort==='country'){
-    const byC={};sorted.forEach(d=>{if(!byC[d.Country])byC[d.Country]=[];byC[d.Country].push(d);});
+    const byC={};sorted.forEach(d=>{const c=d.Country||'—';if(!byC[c])byC[c]=[];byC[c].push(d);});
     Object.entries(byC).forEach(([c,evs])=>{
-      evs.sort((a,b)=>parseDate(a['Event Date'])-parseDate(b['Event Date']));
+      evs.sort((a,b)=>pd(a['Event Date'])-pd(b['Event Date']));
       const cA=evs.reduce((s,d)=>s+d.Member+d.Guest+d['Co-chair']+d.Delegate,0);
       const cS=evs.reduce((s,d)=>s+d['Total Amount'],0),cX=evs.reduce((s,d)=>s+d['SPEX Amount'],0);
-      html+=`<tr class="country-hdr"><td colspan="11">${c} — ${evs.length} evento${evs.length>1?'s':''} · ${cA} participantes</td></tr>`;
+      html+=`<tr class="country-hdr"><td colspan="13">${c} — ${evs.length} evento${evs.length>1?'s':''} · ${cA} participantes</td></tr>`;
       evs.forEach(d=>{html+=rowHtml(d);});
-      if(!fc)html+=`<tr class="country-sub"><td colspan="5">Subtotal ${c}</td><td class="num" colspan="6">${cA} part.</td><td class="num t-blue">${cS>0?'€'+Math.round(cS).toLocaleString('de-DE'):'—'}</td><td class="num t-green">${cX>0?'€'+Math.round(cX).toLocaleString('de-DE'):'—'}</td></tr>`;
+      if(!fc)html+=`<tr class="country-sub"><td colspan="5">Subtotal ${c}</td><td class="num" colspan="4">${cA} part.</td><td class="num t-blue">${cS>0?'€'+Math.round(cS).toLocaleString('de-DE'):'—'}</td><td class="num t-green">${cX>0?'€'+Math.round(cX).toLocaleString('de-DE'):'—'}</td><td colspan="2"></td></tr>`;
     });
   } else if(currentSort==='type'){
     const byT={};sorted.forEach(d=>{const k=d['Event Type']||'Outro';if(!byT[k])byT[k]=[];byT[k].push(d);});
     Object.entries(byT).forEach(([t,evs])=>{
       const tA=evs.reduce((s,d)=>s+d.Member+d.Guest+d['Co-chair']+d.Delegate,0);
-      html+=`<tr class="country-hdr"><td colspan="11">${t} — ${evs.length} evento${evs.length>1?'s':''} · ${tA} participantes</td></tr>`;
+      html+=`<tr class="country-hdr"><td colspan="13">${t} — ${evs.length} evento${evs.length>1?'s':''} · ${tA} participantes</td></tr>`;
       evs.forEach(d=>{html+=rowHtml(d);});
     });
   } else {
@@ -337,83 +356,99 @@ function render(){
 }
 
 function buildCharts(){
-  // Chart 1: Sales by event (stacked bar)
-  const withSales=DATA.filter(d=>d['Total Amount']>0).sort((a,b)=>b['Total Amount']-a['Total Amount']);
-  const sLabels=withSales.map(d=>sn(d['Event Name']));
-  const ticketD=withSales.map(d=>Math.round(d['Total Amount']-d['SPEX Amount']));
-  const spexD=withSales.map(d=>Math.round(d['SPEX Amount']));
-  const sH=Math.max(340, withSales.length*38+60);
-  document.getElementById('salesWrap').style.height=sH+'px';
-  new Chart(document.getElementById('salesChart'),{
-    type:'bar',
-    data:{
-      labels:sLabels,
-      datasets:[
-        {label:'Ticket (Events)',data:ticketD,backgroundColor:'#185FA5',borderRadius:3,borderSkipped:false},
-        {label:'SPEX',data:spexD,backgroundColor:'#0F6E56',borderRadius:3,borderSkipped:false}
-      ]
-    },
-    options:{
-      indexAxis:'y',responsive:true,maintainAspectRatio:false,
-      plugins:{
-        legend:{display:false},
-        tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: €${ctx.parsed.x.toLocaleString('de-DE')}`}}
-      },
-      scales:{
-        x:{stacked:true,ticks:{callback:v=>'€'+Math.round(v/1000)+'k',font:{size:11},color:'#888'},grid:{color:'#f0efe8'}},
-        y:{stacked:true,ticks:{font:{size:11},color:'#444'},grid:{display:false}}
-      }
-    }
+  const ws=DATA.filter(d=>d['Total Amount']>0).sort((a,b)=>b['Total Amount']-a['Total Amount']);
+  document.getElementById('salesWrap').style.height=Math.max(300,ws.length*36+60)+'px';
+  if(salesCI)salesCI.destroy();
+  salesCI=new Chart(document.getElementById('salesChart'),{type:'bar',data:{labels:ws.map(d=>sn(d['Event Name'])),datasets:[{label:'Ticket',data:ws.map(d=>Math.round(d['Total Amount']-d['SPEX Amount'])),backgroundColor:'#185FA5',borderRadius:3,borderSkipped:false},{label:'SPEX',data:ws.map(d=>Math.round(d['SPEX Amount'])),backgroundColor:'#0F6E56',borderRadius:3,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: €${ctx.parsed.x.toLocaleString('de-DE')}`}}},scales:{x:{stacked:true,ticks:{callback:v=>'€'+Math.round(v/1000)+'k',font:{size:11},color:'#888'},grid:{color:'#f0efe8'}},y:{stacked:true,ticks:{font:{size:11},color:'#444'},grid:{display:false}}}}});
+  const t15=[...DATA].sort((a,b)=>b.Member-a.Member).slice(0,15);
+  document.getElementById('membersWrap').style.height=Math.max(300,15*36+60)+'px';
+  if(membersCI)membersCI.destroy();
+  membersCI=new Chart(document.getElementById('membersChart'),{type:'bar',data:{labels:t15.map(d=>sn(d['Event Name'])),datasets:[{label:'Members',data:t15.map(d=>d.Member),backgroundColor:t15.map((_,i)=>i===0?'#185FA5':i<3?'#378ADD':'#B5D4F4'),borderRadius:3,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.parsed.x} members`}}},scales:{x:{ticks:{font:{size:11},color:'#888'},grid:{color:'#f0efe8'}},y:{ticks:{font:{size:11},color:'#444'},grid:{display:false}}}}});
+  const cd=Object.entries(CONV).filter(([,v])=>v.converted_count>0).sort((a,b)=>b[1].converted_count-a[1].converted_count);
+  if(convCI)convCI.destroy();
+  if(cd.length)convCI=new Chart(document.getElementById('convChart'),{type:'bar',data:{labels:cd.map(([k])=>sn(k)),datasets:[{label:'Guests convertidos',data:cd.map(([,v])=>v.converted_count),backgroundColor:cd.map((_,i)=>i===0?'#7C3AED':i<3?'#A78BFA':'#DDD6FE'),borderRadius:4,borderSkipped:false}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.parsed.x} guest${ctx.parsed.x>1?'s':''} convertido${ctx.parsed.x>1?'s':''}`}}},scales:{x:{ticks:{stepSize:1,font:{size:11},color:'#888'},grid:{color:'#f0efe8'}},y:{ticks:{font:{size:12},color:'#333'},grid:{display:false}}}}});
+}
+
+function renderNC(){
+  const fc=document.getElementById('ncCountry').value;
+  const fr=document.getElementById('ncResp').value;
+  const fs=(document.getElementById('ncSearch').value||'').toLowerCase();
+  let total=0,evCount=0;
+  const allResps=new Set();
+
+  const POD1=['Poland','Germany','UK','Czech Republic'];
+  const POD2=['Italy','Portugal','Spain','France'];
+  const podOrder=c=>POD1.includes(c)?0:POD2.includes(c)?1:2;
+  const countryOrder=c=>{
+    const o1=['Poland','Germany','UK','Czech Republic'];
+    const o2=['Italy','Portugal','Spain','France'];
+    const i1=o1.indexOf(c), i2=o2.indexOf(c);
+    if(i1>=0)return '0_'+i1;
+    if(i2>=0)return '1_'+i2;
+    return '2_'+c;
+  };
+
+  const sorted=Object.entries(NOT_CONV).sort((a,b)=>{
+    const ca=a[1].country||'', cb=b[1].country||'';
+    return countryOrder(ca).localeCompare(countryOrder(cb))||a[0].localeCompare(b[0]);
   });
 
-  // Chart 2: Top 15 members
-  const top15=[...DATA].sort((a,b)=>b.Member-a.Member).slice(0,15);
-  const mLabels=top15.map(d=>sn(d['Event Name']));
-  const mData=top15.map(d=>d.Member);
-  const mColors=mData.map((_,i)=>i===0?'#185FA5':i<3?'#378ADD':'#B5D4F4');
-  const mH=Math.max(340,15*38+60);
-  document.getElementById('membersWrap').style.height=mH+'px';
-  new Chart(document.getElementById('membersChart'),{
-    type:'bar',
-    data:{labels:mLabels,datasets:[{label:'Members',data:mData,backgroundColor:mColors,borderRadius:3,borderSkipped:false}]},
-    options:{
-      indexAxis:'y',responsive:true,maintainAspectRatio:false,
-      plugins:{
-        legend:{display:false},
-        tooltip:{callbacks:{label:ctx=>`${ctx.parsed.x} members`}}
-      },
-      scales:{
-        x:{ticks:{font:{size:11},color:'#888'},grid:{color:'#f0efe8'}},
-        y:{ticks:{font:{size:11},color:'#444'},grid:{display:false}}
-      }
-    }
+  // Filter first to know what's visible
+  const visible=[];
+  sorted.forEach(([ev,{country,contacts}])=>{
+    if(fc&&country!==fc)return;
+    const filtered=contacts.filter(c=>{
+      if(fr&&c.responsible!==fr)return false;
+      if(fs&&!c.name.toLowerCase().includes(fs)&&!c.company.toLowerCase().includes(fs))return false;
+      return true;
+    });
+    if(!filtered.length)return;
+    visible.push({ev,country,filtered});
+    evCount++;total+=filtered.length;
+    filtered.forEach(c=>c.responsible&&allResps.add(c.responsible));
   });
 
-  // Chart 3: Guest conversion ranking
-  const convData = Object.entries(CONV)
-    .filter(([,v]) => v.converted_count > 0)
-    .sort((a,b) => b[1].converted_count - a[1].converted_count);
-  const convLabels = convData.map(([k]) => sn(k));
-  const convCounts = convData.map(([,v]) => v.converted_count);
-  const convColors = convCounts.map((_,i) => i===0?'#7C3AED':i<3?'#A78BFA':'#DDD6FE');
-  new Chart(document.getElementById('convChart'),{
-    type:'bar',
-    data:{labels:convLabels,datasets:[{label:'Guests convertidos',data:convCounts,backgroundColor:convColors,borderRadius:4,borderSkipped:false}]},
-    options:{
-      indexAxis:'y',responsive:true,maintainAspectRatio:false,
-      plugins:{
-        legend:{display:false},
-        tooltip:{callbacks:{label:ctx=>`${ctx.parsed.x} guest${ctx.parsed.x>1?'s':''} convertido${ctx.parsed.x>1?'s':''}`}}
-      },
-      scales:{
-        x:{ticks:{stepSize:1,font:{size:11},color:'#888'},grid:{color:'#f0efe8'}},
-        y:{ticks:{font:{size:12},color:'#333'},grid:{display:false}}
+  // Build HTML with POD headers and country subheaders
+  let html='';
+  let lastPod=-1, lastCountry='';
+
+  visible.forEach(({ev,country,filtered})=>{
+    const pod=podOrder(country);
+
+    // POD header
+    if(pod!==lastPod){
+      if(pod===0&&(!fc||POD1.includes(fc))){
+        html+=`<div style="margin:${lastPod===-1?'0':'24px'} 0 12px;padding:10px 16px;background:#185FA5;color:#fff;border-radius:10px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">
+          POD 1 &nbsp;·&nbsp; <span style="font-weight:400;opacity:.7">Poland · Germany · UK · Czech Republic</span>
+        </div>`;
+      } else if(pod===1&&(!fc||POD2.includes(fc))){
+        html+=`<div style="margin:${lastPod===-1?'0':'24px'} 0 12px;padding:10px 16px;background:#185FA5;color:#fff;border-radius:10px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">
+          POD 2 &nbsp;·&nbsp; <span style="font-weight:400;opacity:.8">Italy · Portugal · Spain · France</span>
+        </div>`;
       }
+      lastPod=pod;
+      lastCountry='';
     }
+
+    // Country subheader
+    if(country!==lastCountry){
+      html+=`<div style="margin:12px 0 6px;padding:7px 14px;background:#f0efe8;border-radius:8px;font-size:11px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.06em">${country}</div>`;
+      lastCountry=country;
+    }
+
+    // Event block
+    const rows=filtered.map(c=>`<tr><td>${c.name}</td><td style="color:#555;font-size:12px">${c.title||'—'}</td><td style="color:#555;font-size:12px">${c.company||'—'}</td><td><span class="resp-badge">${c.responsible||'—'}</span></td></tr>`).join('');
+    html+=`<div class="nc-block"><div class="nc-hdr" onclick="this.nextElementSibling.classList.toggle('open')"><span class="nc-hdr-title">${ev}</span><span class="nc-hdr-count">${filtered.length} guest${filtered.length>1?'s':''}</span></div><div class="nc-body"><table class="nc-table"><thead><tr><th>Contato</th><th>Cargo</th><th>Empresa</th><th>GRI Responsible</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
   });
+
+  document.getElementById('nc-total').textContent=total;
+  document.getElementById('nc-events').textContent=evCount;
+  document.getElementById('nc-resps').textContent=allResps.size;
+  document.getElementById('nc-body').innerHTML=html||'<p style="color:#aaa;padding:20px">Nenhum resultado encontrado.</p>';
 }
 
 render();
+renderNC();
 </script>
 </body>
 </html>
